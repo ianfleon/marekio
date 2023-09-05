@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marekio</title>
+    <link rel="stylesheet" href="/libs/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="/libs/onsenui/css/onsen-css-components.min.css">
+    <link rel="stylesheet" href="/style.css">
+    <script src="/libs/onsenui/js/onsenui.min.js"></script>
+    <script src="/libs/jquery/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <ons-navigator swipeable id="appNavigator">
+        <ons-page>
+            <ons-splitter id="appSplitter">
+                <ons-splitter-content page="tabbar.html"></ons-splitter-content>
+            </ons-splitter>
+        </ons-page>
+    </ons-navigator>
+
+    <!-- Routers (Tabbar) -->
+    <template id="tabbar.html">
+        <ons-page id="tabbar">
+            <ons-tabbar animation="slide">
+                <ons-tab page="beranda.html" icon="md-home" label="Beranda">
+                </ons-tab>
+                <ons-tab page="keranjang.html" icon="md-shopping-cart" label="Pesanan">
+                </ons-tab>
+                <ons-tab page="akun.html" icon="md-account-circle" label="Akun">
+                </ons-tab>
+            </ons-tabbar>
+        </ons-page>
+    </template>
+
+    <!-- # Beranda Page -->
+    <template id="beranda.html">
+        <ons-page id="beranda">
+            <ons-toolbar>
+                <div class="center">Beranda</div>
+            </ons-toolbar>
+            <ons-card>
+                <div class="card-product">
+                    <div class="card-content">
+                        <img src="https://source.unsplash.com/random" alt="Onsen UI" />
+                        <div class="card-info">
+                            <div class="card-act">
+                                <button class="btn btn-tambah ms-auto"
+                                    onclick="ons.notification.toast('Berhasil ditambahkan.', { timeout: 1000})">Tambah</button>
+                            </div>
+                            <h4 class="mb-1">Nasi Padang</h4>
+                            <p class="text-muted mb-2">Nasi + Ikan</p>
+                            <p>RP 25.000</p>
+                        </div>
+                    </div>
+                </div>
+            </ons-card>
+        </ons-page>
+    </template>
+
+    <!-- # Keranjang Page -->
+    <template id="keranjang.html">
+        <ons-page id="keranjang">
+            <ons-toolbar>
+                <div class="center">Daftar Pesanan</div>
+                <div class="right">
+                    <ons-toolbar-button>
+                        Checkout
+                    </ons-toolbar-button>
+                </div>
+            </ons-toolbar>
+            <ons-list>
+                <ons-list-item>
+                    <div class="left me-4">
+                        <i class="list-item__icon ion-md-trash me-4"
+                            onclick="ons.notification.confirm('Ingin hapus item ini?')"></i>
+                        <img class="list-item__thumbnail" src="https://source.unsplash.com/random">
+                    </div>
+                    <div class="center">
+                        <span class="list-item__title">Nasi Padang</span><span class="list-item__subtitle">15.000</span>
+                    </div>
+                    <div class="right">
+                        <div><i class="ion-ios-remove-circle-outline"></i></div>
+                        <p class="mx-4">1</p>
+                        <div><i class="ion-ios-add-circle-outline"></i></div>
+                    </div>
+                </ons-list-item>
+            </ons-list>
+        </ons-page>
+    </template>
+
+    <!-- # Akun Page -->
+    <template id="akun.html">
+        <ons-page id="akun">
+
+            <ons-toolbar>
+                <div class="center">Akun</div>
+            </ons-toolbar>
+
+            <ons-card>
+                <div class="d-flex flex-column-center text-center">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww&w=1000&q=80"
+                        class="akun-img mb-2 me-4">
+                    <div class="akun-info">
+                        <h4 class="mb-1">Nacut Soulisa</h4>
+                        <p class="text-muted">Jln. Belmes Hila, No. 2; Dekat Benteng Amsterdam</p>
+                    </div>
+                </div>
+            </ons-card>
+            <ons-card>
+                <div class="content">
+                    <ons-list>
+                        <ons-list-item tappable modifier="longdivider"
+                            onclick="fn.pushPage({'id': 'profil-akun.html', 'Akun': 'PullHook'})">
+                            <div class="left">
+                                <ons-icon icon="ion-ios-settings" class="list-item__icon"></ons-icon>
+                            </div>
+                            <div class="center">
+                                Profil
+                            </div>
+                        </ons-list-item>
+                        <ons-list-item tappable modifier="longdivider"
+                            onclick="fn.pushPage({'id': 'transaksi.html', 'Transaksi': 'PullHook'})">
+                            <div class="left">
+                                <ons-icon icon="ion-ios-card" class="list-item__icon"></ons-icon>
+                            </div>
+                            <div class="center">
+                                Transaksi
+                            </div>
+                        </ons-list-item>
+                        <ons-list-item tappable modifier="longdivider">
+                            <div class="left">
+                                <ons-icon icon="ion-ios-log-out" class="list-item__icon"></ons-icon>
+                            </div>
+                            <div class="center">
+                                Logout
+                            </div>
+                        </ons-list-item>
+                    </ons-list>
+            </ons-card>
+        </ons-page>
+    </template>
+
+    <template id="profil-akun.html">
+        <ons-page id="profil-akun">
+            <ons-toolbar>
+                <div class="left">
+                    <ons-back-button>Kembali</ons-back-button>
+                </div>
+                <div class="center">Profil</div>
+                <div class="right">
+                    <ons-toolbar-button
+                        onclick="fn.pushPage({'id': 'form-profil-pw-akun.html', 'Ganti Password': 'PullHook'})">
+                        Ganti Password
+                    </ons-toolbar-button>
+                </div>
+            </ons-toolbar>
+            <div class="content">
+                <ons-list>
+                    <ons-list-item>
+                        <div class="left">
+                            <ons-icon icon="md-face" class="list-item__icon"></ons-icon>
+                        </div>
+                        <div class="center">
+                            Nacut Soulisa
+                        </div>
+                    </ons-list-item>
+                    <ons-list-item>
+                        <div class="left">
+                            <ons-icon icon="md-phone" class="list-item__icon"></ons-icon>
+                        </div>
+                        <div class="center">
+                            081512981278
+                        </div>
+                    </ons-list-item>
+                    <ons-list-item>
+                        <div class="left">
+                            <ons-icon icon="md-map" class="list-item__icon"></ons-icon>
+                        </div>
+                        <div class="center">
+                            Jln. Belmes, Hila
+                        </div>
+                    </ons-list-item>
+                    <ons-list-item>
+                        <div class="left">
+                            <ons-icon icon="md-key" class="list-item__icon"></ons-icon>
+                        </div>
+                        <div class="center">
+                            ****************
+                        </div>
+                    </ons-list-item>
+                </ons-list>
+                <ons-button modifier="large"
+                    onclick="fn.pushPage({'id': 'form-profil-akun.html', 'Edit Profil': 'PullHook'})">UBAH</ons-button>
+            </div>
+        </ons-page>
+    </template>
+
+    <template id="form-profil-akun.html">
+        <ons-page id="form-profil-akun">
+            <ons-toolbar>
+                <div class="left">
+                    <ons-back-button>Kembali</ons-back-button>
+                </div>
+                <div class="center">Edit Profil</div>
+            </ons-toolbar>
+        </ons-page>
+    </template>
+
+    <template id="form-profil-pw-akun.html">
+        <ons-page id="form-profil-pw-akun">
+            <ons-toolbar>
+                <div class="left">
+                    <ons-back-button>Kembali</ons-back-button>
+                </div>
+                <div class="center">Ganti Password</div>
+            </ons-toolbar>
+        </ons-page>
+    </template>
+
+    <template id="transaksi.html">
+        <ons-page id="transaksi">
+            <ons-toolbar>
+                <div class="left">
+                    <ons-back-button>Kembali</ons-back-button>
+                </div>
+                <div class="center">Transaksi</div>
+            </ons-toolbar>
+
+            <ons-tabbar swipeable position="top">
+                <ons-tab page="proses-transaksi.html" label="Proses" active>
+                </ons-tab>
+                <ons-tab page="selesai-transaksi.html" label="Selesai">
+                </ons-tab>
+            </ons-tabbar>
+        </ons-page>
+    </template>
+
+    <template id="proses-transaksi.html">
+        <ons-page id="proses-transaksi">
+            <ons-card tappable onclick="fn.pushPage({'id': 'pesanan-transaksi.html', 'Pesanan #IUS871287A': 'PullHook'})">
+                <div class="title">
+                    Pesanan #8912YIAS
+                </div>
+                <div class="content">
+                    <ons-list>
+                        <ons-list>- Ayam Bakar</ons-list>
+                        <ons-list>- Teh Manis</ons-list>
+                        <ons-list>- Bebek Suir</ons-list>
+                        <ons-list>- Jantung Pisang</ons-list>
+                    </ons-list>
+                </div>
+            </ons-card>
+            <ons-card tappable>
+                <div class="title">
+                    Pesanan #8912YIAS
+                </div>
+                <div class="content">
+                    <ons-list>
+                        <ons-list>- Ayam Bakar</ons-list>
+                        <ons-list>- Teh Manis</ons-list>
+                        <ons-list>- Bebek Suir</ons-list>
+                        <ons-list>- Jantung Pisang</ons-list>
+                    </ons-list>
+                </div>
+            </ons-card>
+            <ons-card tappable>
+                <div class="title">
+                    Pesanan #8912YIAS
+                </div>
+                <div class="content">
+                    <ons-list>
+                        <ons-list>- Ayam Bakar</ons-list>
+                        <ons-list>- Teh Manis</ons-list>
+                        <ons-list>- Bebek Suir</ons-list>
+                        <ons-list>- Jantung Pisang</ons-list>
+                    </ons-list>
+                </div>
+            </ons-card>
+        </ons-page>
+    </template>
+
+    <template id="selesai-transaksi.html">
+        <ons-page id="selesai-transaksi">
+            Pesanan selesai
+        </ons-page>
+    </template>
+
+    <template id="pesanan-transaksi.html">
+        <ons-page id="pesanan-transaksi">
+            <ons-toolbar>
+                <div class="left">
+                    <ons-back-button>Kembali</ons-back-button>
+                </div>
+                <div class="center">Pesanan</div>
+                <div class="right">
+                    <ons-toolbar-button
+                        onclick="fn.pushPage({'id': 'form-profil-pw-akun.html', 'Ganti Password': 'PullHook'})">
+                        Chat
+                    </ons-toolbar-button>
+                </div>
+            </ons-toolbar>
+            <ons-card>
+                <p></p>
+            </ons-card>
+        </ons-page>
+    </template>
+
+    <script>
+        document.addEventListener('init', function (event) {
+
+            // Current Page Active
+            var page = event.target;
+
+        });
+    </script>
+
+    <script src="/sample.js"></script>
+</body>
+
+</html>

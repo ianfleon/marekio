@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marekio</title>
+    <link rel="stylesheet" href="/libs/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="/libs/onsenui/css/onsen-css-components.min.css">
+    <link rel="stylesheet" href="/style.css">
+    <script src="/libs/onsenui/js/onsenui.min.js"></script>
+    <script src="/libs/jquery/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <ons-navigator swipeable id="appNavigator">
+        <ons-page>
+            <ons-splitter id="appSplitter">
+                <ons-splitter-content page="tabbar.html"></ons-splitter-content>
+            </ons-splitter>
+        </ons-page>
+    </ons-navigator>
+
+    <!-- Routers (Tabbar) -->
+    <template id="tabbar.html">
+        <ons-page id="tabbar">
+            <ons-tabbar animation="slide">
+                <ons-tab page="produk-detail.html" icon="md-menu" label="produk">
+                </ons-tab>
+                <ons-tab page="orderan.html" icon="md-receipt" label="Orderan">
+                </ons-tab>
+                <ons-tab page="admin.html" icon="md-account-circle" label="Akun">
+                </ons-tab>
+            </ons-tabbar>
+        </ons-page>
+    </template>
+
+    <!-- # Produk Page -->
+    <template id="produk.html">
+        <ons-page id="produk">
+            <ons-toolbar>
+                <div class="center">Produk</div>
+                <div class="right">
+                    <ons-toolbar-button>Tambah</ons-toolbar-button>
+                </div>
+            </ons-toolbar>
+            <ons-card onclick="fn.pushPage({'id': 'produk-detail.html', 'Detail': 'PullHook'})">
+                <div class="card-product">
+                    <div class="card-content">
+                        <img src="https://source.unsplash.com/random" alt="Onsen UI" />
+                        <div class="card-info">
+                            <h4 class="mb-1">Nasi Padang</h4>
+                            <p class="text-muted mb-2">Nasi + Ikan</p>
+                            <p>RP 25.000</p>
+                        </div>
+                    </div>
+                </div>
+            </ons-card>
+        </ons-page>
+    </template>
+
+    <template id="produk-detail.html">
+        <ons-page id="produk-detail">
+            <ons-toolbar>
+                <div class="left">
+                    <ons-back-button>Kembali</ons-back-button>
+                </div>
+                <div class="center">
+                    Detail
+                </div>
+                <div class="right">
+                    <ons-toolbar-button id="info-button" onclick="fn.showDialog('popover-dialog')">More
+                    </ons-toolbar-button>
+                </div>
+            </ons-toolbar>
+            <ons-card>
+                <img src="https://asset.kompas.com/crops/CHJoFQa1gAG3u2bYVXEliM_R9Mg=/120x88:920x622/750x500/data/photo/2020/09/25/5f6d572a3c1f9.jpg"
+                    class="img-detail mb-4">
+                <h4 class="mb-1">Nasi Padang</h4>
+                <p class="mb-4">RP 15.000 </p>
+                <div class="description">
+                    <p>Nasi Padang adalah masakan khas padang yang mempunyai aroma dan rasa yang kaya akan rempah.</p>
+                    <br />
+                    <p>Inlcude:</p>
+                    <br />
+                    <p>- Nasi</p>
+                    <p>- Ikan</p>
+                    <p>- Sayur</p>
+                </div>
+            </ons-card>
+            <ons-popover id="popover-dialog" cancelable direction="down" cover-target target="#info-button">
+                <ons-list id="popover-list">
+                    <ons-list-item class="more-options" tappable onclick="fn.hideDialog('popover-dialog')">
+                        <div class="center">Call history</div>
+                    </ons-list-item>
+                    <ons-list-item class="more-options" tappable onclick="fn.hideDialog('popover-dialog')">
+                        <div class="center">Import/export</div>
+                    </ons-list-item>
+                    <ons-list-item class="more-options" tappable onclick="fn.hideDialog('popover-dialog')">
+                        <div class="center">New contact</div>
+                    </ons-list-item>
+                    <ons-list-item class="more-options" tappable onclick="fn.hideDialog('popover-dialog')">
+                        <div class="center">Settings</div>
+                    </ons-list-item>
+                </ons-list>
+            </ons-popover>
+        </ons-page>
+    </template>
+
+
+
+    <template id="orderan.html">
+        <ons-page id="orderan">
+            <ons-toolbar>
+                <div class="left">
+                    <ons-back-button>Kembali</ons-back-button>
+                </div>
+                <div class="center">Orderan</div>
+            </ons-toolbar>
+
+            <ons-tabbar swipeable position="top">
+                <ons-tab page="proses-transaksi.html" label="Proses" active>
+                </ons-tab>
+                <ons-tab page="selesai-transaksi.html" label="Selesai">
+                </ons-tab>
+            </ons-tabbar>
+        </ons-page>
+    </template>
+
+    <template id="proses-transaksi.html">
+        <ons-page id="proses-transaksi">
+            <ons-card tappable
+                onclick="fn.pushPage({'id': 'pesanan-transaksi.html', 'Pesanan #IUS871287A': 'PullHook'})">
+                <div class="title">
+                    Pesanan #8912YIAS
+                </div>
+                <div class="content">
+                    <ons-list>
+                        <ons-list>- Ayam Bakar</ons-list>
+                        <ons-list>- Teh Manis</ons-list>
+                        <ons-list>- Bebek Suir</ons-list>
+                        <ons-list>- Jantung Pisang</ons-list>
+                    </ons-list>
+                </div>
+            </ons-card>
+            <ons-card tappable>
+                <div class="title">
+                    Pesanan #8912YIAS
+                </div>
+                <div class="content">
+                    <ons-list>
+                        <ons-list>- Ayam Bakar</ons-list>
+                        <ons-list>- Teh Manis</ons-list>
+                        <ons-list>- Bebek Suir</ons-list>
+                        <ons-list>- Jantung Pisang</ons-list>
+                    </ons-list>
+                </div>
+            </ons-card>
+            <ons-card tappable>
+                <div class="title">
+                    Pesanan #8912YIAS
+                </div>
+                <div class="content">
+                    <ons-list>
+                        <ons-list>- Ayam Bakar</ons-list>
+                        <ons-list>- Teh Manis</ons-list>
+                        <ons-list>- Bebek Suir</ons-list>
+                        <ons-list>- Jantung Pisang</ons-list>
+                    </ons-list>
+                </div>
+            </ons-card>
+        </ons-page>
+    </template>
+
+    <template id="selesai-transaksi.html">
+        <ons-page id="selesai-transaksi">
+            Pesanan selesai
+        </ons-page>
+    </template>
+
+    <template id="pesanan-transaksi.html">
+        <ons-page id="pesanan-transaksi">
+            <ons-toolbar>
+                <div class="left">
+                    <ons-back-button>Kembali</ons-back-button>
+                </div>
+                <div class="center">Pesanan</div>
+                <div class="right">
+                    <ons-toolbar-button
+                        onclick="fn.pushPage({'id': 'form-profil-pw-akun.html', 'Ganti Password': 'PullHook'})">
+                        Chat
+                    </ons-toolbar-button>
+                </div>
+            </ons-toolbar>
+            <ons-card onclick="app.showFromObject()">
+                <h4>Invoice #1298SAU</h4>
+                <ons-list>
+                    <ons-list-item>
+                        <div class="left">
+                            <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
+                        </div>
+                        <div class="center">
+                            <span class="list-item__title">Nasi Padang</span><span class="list-item__subtitle">2 x
+                                15.000</span>
+                        </div>
+                    </ons-list-item>
+                    <ons-list-item>
+                        <div class="left">
+                            <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
+                        </div>
+                        <div class="center">
+                            <span class="list-item__title">Es Teh</span><span class="list-item__subtitle">1 x
+                                15.000</span>
+                        </div>
+                    </ons-list-item>
+                </ons-list>
+            </ons-card>
+        </ons-page>
+    </template>
+
+    <template id="konfirmasi-pesanan-asheet.html">
+        <ons-action-sheet id="sheet" cancelable title="From template">
+            <ons-action-sheet-button icon="md-square-o">Label</ons-action-sheet-button>
+            <ons-action-sheet-button icon="md-square-o">Label</ons-action-sheet-button>
+            <ons-action-sheet-button icon="md-square-o" modifier="destructive">Label
+            </ons-action-sheet-button>
+            <ons-action-sheet-button icon="md-close">Cancel</ons-action-sheet-button>
+        </ons-action-sheet>
+    </template>
+
+    <script>
+        document.addEventListener('init', function (event) {
+
+            // Current Page Active
+            var page = event.target;
+            var app = {};
+
+        });
+    </script>
+
+    <script src="/sample.js"></script>
+</body>
+
+</html>
