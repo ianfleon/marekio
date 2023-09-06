@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/libs/onsenui/css/onsenui.css">
     <link rel="stylesheet" href="/libs/onsenui/css/onsen-css-components.min.css">
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/css/form.css">
     <script src="/libs/onsenui/js/onsenui.min.js"></script>
     <script src="/libs/jquery/jquery.min.js"></script>
 </head>
@@ -26,7 +27,7 @@
     <template id="tabbar.html">
         <ons-page id="tabbar">
             <ons-tabbar animation="slide">
-                <ons-tab page="produk-detail.html" icon="md-menu" label="produk">
+                <ons-tab page="produk.html" icon="md-menu" label="produk">
                 </ons-tab>
                 <ons-tab page="orderan.html" icon="md-receipt" label="Orderan">
                 </ons-tab>
@@ -36,13 +37,49 @@
         </ons-page>
     </template>
 
+    <!-- # Form Produk -->
+    <template id="form-produk.html">
+        <ons-page id="form-produk">
+            <ons-toolbar>
+                <div class="left">
+                    <ons-back-button>Kembali</ons-back-button>
+                </div>
+                <div class="center">
+                    Tambah Produk
+                </div>
+                <div class="right">
+                    <ons-toolbar-button>Simpan</ons-toolbar-button>
+                </div>
+            </ons-toolbar>
+            <div class="content">
+                <ons-card>
+                    <form>
+                        <div class="mb-4">
+                            <input class="form-input" type="text" placeholder="Nama Makanan / Minuman" />
+                        </div>
+                        <div class="mb-4">
+                            <input class="form-input" type="number" placeholder="Harga" />
+                        </div>
+                        <div class="mb-4">
+                            <textarea class="form-input" rows="12" placeholder="Deskripsi"></textarea>
+                        </div>
+                        <div class="mb-4">
+                            <ons-button modifier="large">Upload Gambar</ons-button>
+                        </div>
+                    </form>
+                </ons-card>
+            </div>
+        </ons-page>
+    </template>
+    <!-- // Form Produk -->
+
     <!-- # Produk Page -->
     <template id="produk.html">
         <ons-page id="produk">
             <ons-toolbar>
                 <div class="center">Produk</div>
                 <div class="right">
-                    <ons-toolbar-button>Tambah</ons-toolbar-button>
+                    <ons-toolbar-button onclick="fn.pushPage({'id': 'form-produk.html', 'Form Produk': 'PullHook'})">Tambah</ons-toolbar-button>
                 </div>
             </ons-toolbar>
             <ons-card onclick="fn.pushPage({'id': 'produk-detail.html', 'Detail': 'PullHook'})">
@@ -108,8 +145,6 @@
         </ons-page>
     </template>
 
-
-
     <template id="orderan.html">
         <ons-page id="orderan">
             <ons-toolbar>
@@ -120,18 +155,18 @@
             </ons-toolbar>
 
             <ons-tabbar swipeable position="top">
-                <ons-tab page="proses-transaksi.html" label="Proses" active>
+                <ons-tab page="transaksi-proses.html" label="Proses" active>
                 </ons-tab>
-                <ons-tab page="selesai-transaksi.html" label="Selesai">
+                <ons-tab page="transaksi-selesai.html" label="Selesai">
                 </ons-tab>
             </ons-tabbar>
         </ons-page>
     </template>
 
-    <template id="proses-transaksi.html">
-        <ons-page id="proses-transaksi">
+    <template id="transaksi-proses.html">
+        <ons-page id="transaksi-proses">
             <ons-card tappable
-                onclick="fn.pushPage({'id': 'pesanan-transaksi.html', 'Pesanan #IUS871287A': 'PullHook'})">
+                onclick="fn.pushPage({'id': 'detail-pesanan.html', 'Pesanan #IUS871287A': 'PullHook'})">
                 <div class="title">
                     Pesanan #8912YIAS
                 </div>
@@ -173,14 +208,14 @@
         </ons-page>
     </template>
 
-    <template id="selesai-transaksi.html">
-        <ons-page id="selesai-transaksi">
+    <template id="transaksi-selesai.html">
+        <ons-page id="transaksi-selesai">
             Pesanan selesai
         </ons-page>
     </template>
 
-    <template id="pesanan-transaksi.html">
-        <ons-page id="pesanan-transaksi">
+    <template id="detail-pesanan.html">
+        <ons-page id="detail-pesanan">
             <ons-toolbar>
                 <div class="left">
                     <ons-back-button>Kembali</ons-back-button>
@@ -218,6 +253,8 @@
             </ons-card>
         </ons-page>
     </template>
+
+    <template id=""
 
     <template id="konfirmasi-pesanan-asheet.html">
         <ons-action-sheet id="sheet" cancelable title="From template">

@@ -1,0 +1,16 @@
+.form-input {
+	font-family: inherit;
+}
+
+input.form-input, textarea.form-input {
+	border: none;
+	padding: 1rem;
+	outline: .15rem solid #ddd;
+	width: 100%;
+	box-sizing: border-box;
+	border-radius: .3em;
+}
+
+.form-input:focus {
+	outline: 2px solid #888;
+}
