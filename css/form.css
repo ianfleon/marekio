@@ -5,12 +5,16 @@
 input.form-input, textarea.form-input {
 	border: none;
 	padding: 1rem;
-	outline: .15rem solid #ddd;
+	outline: 1.25px solid #efefef;
 	width: 100%;
 	box-sizing: border-box;
 	border-radius: .3em;
 }
 
+textarea.form-input {
+	resize: vertical;
+}
+
 .form-input:focus {
-	outline: 2px solid #888;
+	outline: 2px solid #333333;
 }

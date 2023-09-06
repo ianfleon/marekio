@@ -9,12 +9,14 @@
     <link rel="stylesheet" href="/libs/onsenui/css/onsen-css-components.min.css">
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/css/form.css">
+    <link rel="stylesheet" href="/css/card.css">
     <script src="/libs/onsenui/js/onsenui.min.js"></script>
     <script src="/libs/jquery/jquery.min.js"></script>
 </head>
 
 <body>
 
+    <!-- # Main Navigator -->
     <ons-navigator swipeable id="appNavigator">
         <ons-page>
             <ons-splitter id="appSplitter">
@@ -22,8 +24,9 @@
             </ons-splitter>
         </ons-page>
     </ons-navigator>
+    <!-- // Main Navigator -->
 
-    <!-- Routers (Tabbar) -->
+    <!-- # Tabbar -->
     <template id="tabbar.html">
         <ons-page id="tabbar">
             <ons-tabbar animation="slide">
@@ -31,11 +34,12 @@
                 </ons-tab>
                 <ons-tab page="orderan.html" icon="md-receipt" label="Orderan">
                 </ons-tab>
-                <ons-tab page="admin.html" icon="md-account-circle" label="Akun">
+                <ons-tab page="" icon="md-account-circle" label="Akun">
                 </ons-tab>
             </ons-tabbar>
         </ons-page>
     </template>
+    <!-- // Tabbar -->
 
     <!-- # Form Produk -->
     <template id="form-produk.html">
@@ -79,7 +83,8 @@
             <ons-toolbar>
                 <div class="center">Produk</div>
                 <div class="right">
-                    <ons-toolbar-button onclick="fn.pushPage({'id': 'form-produk.html', 'Form Produk': 'PullHook'})">Tambah</ons-toolbar-button>
+                    <ons-toolbar-button onclick="fn.pushPage({'id': 'form-produk.html', 'Form Produk': 'PullHook'})">
+                        Tambah</ons-toolbar-button>
                 </div>
             </ons-toolbar>
             <ons-card onclick="fn.pushPage({'id': 'produk-detail.html', 'Detail': 'PullHook'})">
@@ -88,7 +93,6 @@
                         <img src="https://source.unsplash.com/random" alt="Onsen UI" />
                         <div class="card-info">
                             <h4 class="mb-1">Nasi Padang</h4>
-                            <p class="text-muted mb-2">Nasi + Ikan</p>
                             <p>RP 25.000</p>
                         </div>
                     </div>
@@ -97,6 +101,7 @@
         </ons-page>
     </template>
 
+    <!-- # Detail Produk Page -->
     <template id="produk-detail.html">
         <ons-page id="produk-detail">
             <ons-toolbar>
@@ -107,7 +112,7 @@
                     Detail
                 </div>
                 <div class="right">
-                    <ons-toolbar-button id="info-button" onclick="fn.showDialog('popover-dialog')">More
+                    <ons-toolbar-button icon="md-more-vert" id="info-button" onclick="fn.showDialog('popover-dialog')">
                     </ons-toolbar-button>
                 </div>
             </ons-toolbar>
@@ -129,87 +134,64 @@
             <ons-popover id="popover-dialog" cancelable direction="down" cover-target target="#info-button">
                 <ons-list id="popover-list">
                     <ons-list-item class="more-options" tappable onclick="fn.hideDialog('popover-dialog')">
-                        <div class="center">Call history</div>
+                        <div class="center">Edit</div>
                     </ons-list-item>
                     <ons-list-item class="more-options" tappable onclick="fn.hideDialog('popover-dialog')">
-                        <div class="center">Import/export</div>
-                    </ons-list-item>
-                    <ons-list-item class="more-options" tappable onclick="fn.hideDialog('popover-dialog')">
-                        <div class="center">New contact</div>
-                    </ons-list-item>
-                    <ons-list-item class="more-options" tappable onclick="fn.hideDialog('popover-dialog')">
-                        <div class="center">Settings</div>
+                        <div class="center">Hapus</div>
                     </ons-list-item>
                 </ons-list>
             </ons-popover>
+            <script src="/js/produk-detail.js">
+            </script>
         </ons-page>
     </template>
 
+    <!-- # Orderan Page -->
     <template id="orderan.html">
         <ons-page id="orderan">
             <ons-toolbar>
-                <div class="left">
-                    <ons-back-button>Kembali</ons-back-button>
-                </div>
                 <div class="center">Orderan</div>
             </ons-toolbar>
-
             <ons-tabbar swipeable position="top">
-                <ons-tab page="transaksi-proses.html" label="Proses" active>
+                <ons-tab page="orderan-proses.html" label="Proses" active>
                 </ons-tab>
-                <ons-tab page="transaksi-selesai.html" label="Selesai">
+                <ons-tab page="orderan-selesai.html" label="Selesai">
                 </ons-tab>
             </ons-tabbar>
         </ons-page>
     </template>
 
-    <template id="transaksi-proses.html">
-        <ons-page id="transaksi-proses">
-            <ons-card tappable
-                onclick="fn.pushPage({'id': 'detail-pesanan.html', 'Pesanan #IUS871287A': 'PullHook'})">
+    <template id="orderan-proses.html">
+        <ons-page id="orderan-proses">
+            <ons-card class="card-orderan" tappable
+            onclick="fn.pushPage({'id': 'detail-pesanan.html', 'Pesanan #IUS871287A': 'PullHook'})">
+            <span class="notification">3</span>
                 <div class="title">
                     Pesanan #8912YIAS
                 </div>
                 <div class="content">
-                    <ons-list>
-                        <ons-list>- Ayam Bakar</ons-list>
-                        <ons-list>- Teh Manis</ons-list>
-                        <ons-list>- Bebek Suir</ons-list>
-                        <ons-list>- Jantung Pisang</ons-list>
-                    </ons-list>
+                    <p><b>Nacut</b></p>
+                    <p>081209984791</p>
+                    <p>Jln. Belmes; Dekat benteng hila</p>
                 </div>
             </ons-card>
-            <ons-card tappable>
+            <ons-card class="card-orderan" tappable
+            onclick="fn.pushPage({'id': 'detail-pesanan.html', 'Pesanan #IUS871287A': 'PullHook'})">
+            <span class="notification">1</span>
                 <div class="title">
                     Pesanan #8912YIAS
                 </div>
                 <div class="content">
-                    <ons-list>
-                        <ons-list>- Ayam Bakar</ons-list>
-                        <ons-list>- Teh Manis</ons-list>
-                        <ons-list>- Bebek Suir</ons-list>
-                        <ons-list>- Jantung Pisang</ons-list>
-                    </ons-list>
-                </div>
-            </ons-card>
-            <ons-card tappable>
-                <div class="title">
-                    Pesanan #8912YIAS
-                </div>
-                <div class="content">
-                    <ons-list>
-                        <ons-list>- Ayam Bakar</ons-list>
-                        <ons-list>- Teh Manis</ons-list>
-                        <ons-list>- Bebek Suir</ons-list>
-                        <ons-list>- Jantung Pisang</ons-list>
-                    </ons-list>
+                    <p><b>Nacut</b></p>
+                    <p>081209984791</p>
+                    <p>Jln. Belmes; Dekat benteng hila</p>
                 </div>
             </ons-card>
         </ons-page>
     </template>
 
-    <template id="transaksi-selesai.html">
-        <ons-page id="transaksi-selesai">
+    <template id="orderan-selesai.html">
+        <ons-page id="orderan-selesai">
             Pesanan selesai
         </ons-page>
     </template>
@@ -240,23 +222,12 @@
                                 15.000</span>
                         </div>
                     </ons-list-item>
-                    <ons-list-item>
-                        <div class="left">
-                            <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
-                        </div>
-                        <div class="center">
-                            <span class="list-item__title">Es Teh</span><span class="list-item__subtitle">1 x
-                                15.000</span>
-                        </div>
-                    </ons-list-item>
                 </ons-list>
             </ons-card>
         </ons-page>
     </template>
 
-    <template id=""
-
-    <template id="konfirmasi-pesanan-asheet.html">
+    <template id="" <template id="konfirmasi-pesanan-asheet.html">
         <ons-action-sheet id="sheet" cancelable title="From template">
             <ons-action-sheet-button icon="md-square-o">Label</ons-action-sheet-button>
             <ons-action-sheet-button icon="md-square-o">Label</ons-action-sheet-button>
@@ -274,6 +245,40 @@
             var app = {};
 
         });
+    </script>
+
+    <script>
+        window.fn = {};
+
+        window.fn.toggleMenu = function () {
+            document.getElementById('appSplitter').right.toggle();
+        };
+
+        window.fn.loadView = function (index) {
+            document.getElementById('appTabbar').setActiveTab(index);
+            document.getElementById('sidemenu').close();
+        };
+
+        window.fn.loadLink = function (url) {
+            window.open(url, '_blank');
+        };
+
+        window.fn.pushPage = function (page, anim) {
+            if (anim) {
+                document.getElementById('appNavigator').pushPage(page.id, {
+                    data: {
+                        title: page.title
+                    },
+                    animation: anim
+                });
+            } else {
+                document.getElementById('appNavigator').pushPage(page.id, {
+                    data: {
+                        title: page.title
+                    }
+                });
+            }
+        };
     </script>
 
     <script src="/sample.js"></script>
