@@ -30,7 +30,7 @@
     <template id="tabbar.html">
         <ons-page id="tabbar">
             <ons-tabbar animation="slide">
-                <ons-tab page="produk.html" icon="md-menu" label="produk">
+                <ons-tab page="produk.html" icon="md-home" label="Produk">
                 </ons-tab>
                 <ons-tab page="orderan.html" icon="md-receipt" label="Orderan">
                 </ons-tab>
@@ -119,7 +119,7 @@
             <ons-card>
                 <img src="https://asset.kompas.com/crops/CHJoFQa1gAG3u2bYVXEliM_R9Mg=/120x88:920x622/750x500/data/photo/2020/09/25/5f6d572a3c1f9.jpg"
                     class="img-detail mb-4">
-                <h4 class="mb-1">Nasi Padang</h4>
+                <h4 class="mb-1"><b>Nasi Padang</b></h4>
                 <p class="mb-4">RP 15.000 </p>
                 <div class="description">
                     <p>Nasi Padang adalah masakan khas padang yang mempunyai aroma dan rasa yang kaya akan rempah.</p>
@@ -134,7 +134,7 @@
             <ons-popover id="popover-dialog" cancelable direction="down" cover-target target="#info-button">
                 <ons-list id="popover-list">
                     <ons-list-item class="more-options" tappable onclick="fn.hideDialog('popover-dialog')">
-                        <div class="center">Edit</div>
+                        <div class="center" onclick="fn.pushPage({'id': 'form-produk.html', 'act' : 'PullHook'})">Edit</div>
                     </ons-list-item>
                     <ons-list-item class="more-options" tappable onclick="fn.hideDialog('popover-dialog')">
                         <div class="center">Hapus</div>
@@ -204,9 +204,8 @@
                 </div>
                 <div class="center">Pesanan</div>
                 <div class="right">
-                    <ons-toolbar-button
+                    <ons-toolbar-button icon="md-more-vert"
                         onclick="fn.pushPage({'id': 'form-profil-pw-akun.html', 'Ganti Password': 'PullHook'})">
-                        Chat
                     </ons-toolbar-button>
                 </div>
             </ons-toolbar>
@@ -224,10 +223,40 @@
                     </ons-list-item>
                 </ons-list>
             </ons-card>
+            <ons-popover id="popover-dialog" cancelable direction="down" cover-target target="#info-button">
+                <ons-list id="popover-list">
+                    <ons-list-item class="more-options" tappable onclick="fn.hideDialog('popover-dialog')">
+                        <div class="center" onclick="fn.pushPage({'id': 'form-produk.html', 'act' : 'PullHook'})">Antar</div>
+                    </ons-list-item>
+                    <ons-list-item class="more-options" tappable onclick="fn.hideDialog('popover-dialog')">
+                        <div class="center">Batal</div>
+                    </ons-list-item>
+                </ons-list>
+            </ons-popover>
+            <script>
+                var infoButton = document.getElementById('info-button');
+window.fn.showDialog = function (id) {
+    var elem = document.getElementById(id);
+    if (id === 'popover-dialog') {
+        elem.show(infoButton);
+    } else {
+        elem.show();
+        if (id === 'modal-dialog') {
+            clearTimeout(timeoutID);
+            timeoutID = setTimeout(function () {
+                fn.hideDialog(id)
+            }, 2000);
+        }
+    }
+};
+window.fn.hideDialog = function (id) {
+    document.getElementById(id).hide();
+};
+            </script>
         </ons-page>
     </template>
 
-    <template id="" <template id="konfirmasi-pesanan-asheet.html">
+    <template id="konfirmasi-pesanan-asheet.html">
         <ons-action-sheet id="sheet" cancelable title="From template">
             <ons-action-sheet-button icon="md-square-o">Label</ons-action-sheet-button>
             <ons-action-sheet-button icon="md-square-o">Label</ons-action-sheet-button>
@@ -247,41 +276,8 @@
         });
     </script>
 
-    <script>
-        window.fn = {};
-
-        window.fn.toggleMenu = function () {
-            document.getElementById('appSplitter').right.toggle();
-        };
-
-        window.fn.loadView = function (index) {
-            document.getElementById('appTabbar').setActiveTab(index);
-            document.getElementById('sidemenu').close();
-        };
-
-        window.fn.loadLink = function (url) {
-            window.open(url, '_blank');
-        };
-
-        window.fn.pushPage = function (page, anim) {
-            if (anim) {
-                document.getElementById('appNavigator').pushPage(page.id, {
-                    data: {
-                        title: page.title
-                    },
-                    animation: anim
-                });
-            } else {
-                document.getElementById('appNavigator').pushPage(page.id, {
-                    data: {
-                        title: page.title
-                    }
-                });
-            }
-        };
+    <script src="/js/main.js">
     </script>
 
-    <script src="/sample.js"></script>
 </body>
-
 </html>

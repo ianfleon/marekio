@@ -61,6 +61,51 @@
         </ons-page>
     </template>
 
+    <!-- # Detail Produk Page -->
+    <template id="produk-detail.html">
+        <ons-page id="produk-detail">
+            <ons-toolbar>
+                <div class="left">
+                    <ons-back-button>Kembali</ons-back-button>
+                </div>
+                <div class="center">
+                    Detail
+                </div>
+                <div class="right">
+                    <ons-toolbar-button icon="md-more-vert" id="info-button" onclick="fn.showDialog('popover-dialog')">
+                    </ons-toolbar-button>
+                </div>
+            </ons-toolbar>
+            <ons-card>
+                <img src="https://asset.kompas.com/crops/CHJoFQa1gAG3u2bYVXEliM_R9Mg=/120x88:920x622/750x500/data/photo/2020/09/25/5f6d572a3c1f9.jpg"
+                    class="img-detail mb-4">
+                <h4 class="mb-1">Nasi Padang</h4>
+                <p class="mb-4">RP 15.000 </p>
+                <div class="description">
+                    <p>Nasi Padang adalah masakan khas padang yang mempunyai aroma dan rasa yang kaya akan rempah.</p>
+                    <br />
+                    <p>Inlcude:</p>
+                    <br />
+                    <p>- Nasi</p>
+                    <p>- Ikan</p>
+                    <p>- Sayur</p>
+                </div>
+            </ons-card>
+            <ons-popover id="popover-dialog" cancelable direction="down" cover-target target="#info-button">
+                <ons-list id="popover-list">
+                    <ons-list-item class="more-options" tappable onclick="fn.hideDialog('popover-dialog')">
+                        <div class="center">Edit</div>
+                    </ons-list-item>
+                    <ons-list-item class="more-options" tappable onclick="fn.hideDialog('popover-dialog')">
+                        <div class="center">Hapus</div>
+                    </ons-list-item>
+                </ons-list>
+            </ons-popover>
+            <script src="/js/produk-detail.js">
+            </script>
+        </ons-page>
+    </template>
+
     <!-- # Keranjang Page -->
     <template id="keranjang.html">
         <ons-page id="keranjang">
