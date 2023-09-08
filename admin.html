@@ -134,13 +134,23 @@
             <ons-popover id="popover-dialog" cancelable direction="down" cover-target target="#info-button">
                 <ons-list id="popover-list">
                     <ons-list-item class="more-options" tappable onclick="fn.hideDialog('popover-dialog')">
-                        <div class="center" onclick="fn.pushPage({'id': 'form-produk.html', 'act' : 'PullHook'})">Edit</div>
+                        <div class="center" onclick="fn.pushPage({'id': 'form-produk.html', 'act' : 'PullHook'})">Edit
+                        </div>
                     </ons-list-item>
                     <ons-list-item class="more-options" tappable onclick="fn.hideDialog('popover-dialog')">
-                        <div class="center">Hapus</div>
+                        <div class="center" onclick="createAlertDialog()">Hapus</div>
                     </ons-list-item>
                 </ons-list>
             </ons-popover>
+            <ons-alert-dialog id="my-alert-dialog" modifier="rowfooter">
+                <div class="alert-dialog-content">
+                    Ingin hapus produk ini?
+                </div>
+                <div class="alert-dialog-footer">
+                    <ons-alert-dialog-button onclick="hideAlertDialog()">Cancel</ons-alert-dialog-button>
+                    <ons-alert-dialog-button onclick="hideAlertDialog()">OK</ons-alert-dialog-button>
+                </div>
+            </ons-alert-dialog>
             <script src="/js/produk-detail.js">
             </script>
         </ons-page>
@@ -155,6 +165,8 @@
             <ons-tabbar swipeable position="top">
                 <ons-tab page="orderan-proses.html" label="Proses" active>
                 </ons-tab>
+                <ons-tab page="detail-pesanan.html" label="Diantar" active>
+                </ons-tab>
                 <ons-tab page="orderan-selesai.html" label="Selesai">
                 </ons-tab>
             </ons-tabbar>
@@ -164,8 +176,8 @@
     <template id="orderan-proses.html">
         <ons-page id="orderan-proses">
             <ons-card class="card-orderan" tappable
-            onclick="fn.pushPage({'id': 'detail-pesanan.html', 'Pesanan #IUS871287A': 'PullHook'})">
-            <span class="notification">3</span>
+                onclick="fn.pushPage({'id': 'detail-pesanan.html', 'Pesanan #IUS871287A': 'PullHook'})">
+                <span class="notification">3</span>
                 <div class="title">
                     Pesanan #8912YIAS
                 </div>
@@ -176,8 +188,37 @@
                 </div>
             </ons-card>
             <ons-card class="card-orderan" tappable
-            onclick="fn.pushPage({'id': 'detail-pesanan.html', 'Pesanan #IUS871287A': 'PullHook'})">
-            <span class="notification">1</span>
+                onclick="fn.pushPage({'id': 'detail-pesanan.html', 'Pesanan #IUS871287A': 'PullHook'})">
+                <span class="notification">1</span>
+                <div class="title">
+                    Pesanan #8912YIAS
+                </div>
+                <div class="content">
+                    <p><b>Nacut</b></p>
+                    <p>081209984791</p>
+                    <p>Jln. Belmes; Dekat benteng hila</p>
+                </div>
+            </ons-card>
+        </ons-page>
+    </template>
+    
+    <template id="orderan-proses.html">
+        <ons-page id="orderan-proses">
+            <ons-card class="card-orderan" tappable
+                onclick="fn.pushPage({'id': 'detail-pesanan.html', 'Pesanan #IUS871287A': 'PullHook'})">
+                <span class="notification">3</span>
+                <div class="title">
+                    Pesanan #8912YIAS
+                </div>
+                <div class="content">
+                    <p><b>Nacut</b></p>
+                    <p>081209984791</p>
+                    <p>Jln. Belmes; Dekat benteng hila</p>
+                </div>
+            </ons-card>
+            <ons-card class="card-orderan" tappable
+                onclick="fn.pushPage({'id': 'detail-pesanan.html', 'Pesanan #IUS871287A': 'PullHook'})">
+                <span class="notification">1</span>
                 <div class="title">
                     Pesanan #8912YIAS
                 </div>
@@ -226,7 +267,8 @@
             <ons-popover id="popover-dialog" cancelable direction="down" cover-target target="#info-button">
                 <ons-list id="popover-list">
                     <ons-list-item class="more-options" tappable onclick="fn.hideDialog('popover-dialog')">
-                        <div class="center" onclick="fn.pushPage({'id': 'form-produk.html', 'act' : 'PullHook'})">Antar</div>
+                        <div class="center" onclick="fn.pushPage({'id': 'form-produk.html', 'act' : 'PullHook'})">Antar
+                        </div>
                     </ons-list-item>
                     <ons-list-item class="more-options" tappable onclick="fn.hideDialog('popover-dialog')">
                         <div class="center">Batal</div>
@@ -235,23 +277,23 @@
             </ons-popover>
             <script>
                 var infoButton = document.getElementById('info-button');
-window.fn.showDialog = function (id) {
-    var elem = document.getElementById(id);
-    if (id === 'popover-dialog') {
-        elem.show(infoButton);
-    } else {
-        elem.show();
-        if (id === 'modal-dialog') {
-            clearTimeout(timeoutID);
-            timeoutID = setTimeout(function () {
-                fn.hideDialog(id)
-            }, 2000);
-        }
-    }
-};
-window.fn.hideDialog = function (id) {
-    document.getElementById(id).hide();
-};
+                window.fn.showDialog = function (id) {
+                    var elem = document.getElementById(id);
+                    if (id === 'popover-dialog') {
+                        elem.show(infoButton);
+                    } else {
+                        elem.show();
+                        if (id === 'modal-dialog') {
+                            clearTimeout(timeoutID);
+                            timeoutID = setTimeout(function () {
+                                fn.hideDialog(id)
+                            }, 2000);
+                        }
+                    }
+                };
+                window.fn.hideDialog = function (id) {
+                    document.getElementById(id).hide();
+                };
             </script>
         </ons-page>
     </template>
@@ -280,4 +322,5 @@ window.fn.hideDialog = function (id) {
     </script>
 
 </body>
+
 </html>
