@@ -21,14 +21,59 @@ class Product extends BaseController
         $this->model = new Product_Model();
     }
 
-    public function list()
+    public function index($id = null)
     {
 
-        $result = $this->model->get_all();
+        $result = [];
+
+        if ($id != null) {
+            
+            $result = $this->model->find(['product_id' => $id])[0];
+            
+            return $this->respond([
+                'status' => 200,
+                'data' => $result
+            ]);
+            
+        }
+        
+        $this->model->orderBy('product_id', 'DESC');
+        $result = $this->model->findAll();
 
         return $this->respond([
             'status' => 200,
             'data' => $result
         ]);
     }
+
+    public function add()
+    {
+        $reqs = $this->request->getPost();
+        $imgfile = $this->request->getFile('product_img');
+
+        
+        $newName = $imgfile->getRandomName();
+        $imgfile->move(ROOTPATH . 'public/img', $newName);
+        
+        $reqs['product_img'] = $newName;
+
+        $result = $this->model->insert($reqs);
+    }
+
+    public function delete($id)
+    {
+        if (!$this->model->delete(['product_id' => $id])) {
+            return $this->respond([
+                'status' => 500,
+                'messages' => 'Data gagal dihapus'
+            ]);
+        }
+
+        return $this->respond([
+            'status' => 200,
+            'messages' => 'Data berhasil dihapus'
+        ]);
+
+    }
+
 }

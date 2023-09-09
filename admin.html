@@ -34,8 +34,6 @@
                 </ons-tab>
                 <ons-tab page="orderan.html" icon="md-receipt" label="Orderan">
                 </ons-tab>
-                <ons-tab page="" icon="md-account-circle" label="Akun">
-                </ons-tab>
             </ons-tabbar>
         </ons-page>
     </template>
@@ -48,31 +46,35 @@
                 <div class="left">
                     <ons-back-button>Kembali</ons-back-button>
                 </div>
-                <div class="center">
-                    Tambah Produk
-                </div>
+                <div class="center">Form Produk</div>
                 <div class="right">
-                    <ons-toolbar-button>Simpan</ons-toolbar-button>
+                    <ons-toolbar-button id="btn_save">Simpan</ons-toolbar-button>
                 </div>
             </ons-toolbar>
             <div class="content">
                 <ons-card>
-                    <form>
+                    <form id="form_product">
                         <div class="mb-4">
-                            <input class="form-input" type="text" placeholder="Nama Makanan / Minuman" />
+                            <input class="form-input" type="text" name="product_nama"
+                                placeholder="Nama Makanan / Minuman" />
                         </div>
                         <div class="mb-4">
-                            <input class="form-input" type="number" placeholder="Harga" />
+                            <input class="form-input" name="product_harga" type="number" placeholder="Harga" />
                         </div>
                         <div class="mb-4">
-                            <textarea class="form-input" rows="12" placeholder="Deskripsi"></textarea>
+                            <textarea class="form-input" name="product_desc" rows="12"
+                                placeholder="Deskripsi"></textarea>
                         </div>
                         <div class="mb-4">
-                            <ons-button modifier="large">Upload Gambar</ons-button>
+                            <img id="imgpreview" class="d-none w-100" />
+                            <input type="file" onchange="previewImage(this)" id="imgupload" accept="image/*"
+                                name="product_img" class="d-none"/>
+                            <ons-button modifier="large" id="btn_upload_img">Upload Gambar</ons-button>
                         </div>
                     </form>
                 </ons-card>
             </div>
+            <script src="/js/form-product.js"></script>
         </ons-page>
     </template>
     <!-- // Form Produk -->
@@ -80,30 +82,22 @@
     <!-- # Produk Page -->
     <template id="produk.html">
         <ons-page id="produk">
+
             <ons-toolbar>
                 <div class="center">Produk</div>
                 <div class="right">
-                    <ons-toolbar-button onclick="fn.pushPage({'id': 'form-produk.html', 'Form Produk': 'PullHook'})">
+                    <ons-toolbar-button onclick="fn.pushPage({'id': 'form-produk.html', 'title': 'Tambah Produk'})">
                         Tambah</ons-toolbar-button>
                 </div>
             </ons-toolbar>
-            <section id="product_card_wraper">
-                <!-- <ons-card onclick="fn.pushPage({'id': 'produk-detail.html', 'Detail': 'PullHook'})">
-                    <div class="card-product">
-                        <div class="card-content">
-                            <img src="https://source.unsplash.com/random" alt="Onsen UI" />
-                            <div class="card-info">
-                                <h4 class="mb-1">Nasi Padang</h4>
-                                <p>RP 25.000</p>
-                            </div>
-                        </div>
-                    </div>
-                </ons-card> -->
-            </section>
+
+            <ons-pull-hook id="pull-hook"></ons-pull-hook>
+            <section id="product_card_wraper"></section>
+
             <script src="/js/produk.js"></script>
+        
         </ons-page>
     </template>
-    <!-- // Produk Page -->
 
     <!-- # Detail Produk Page -->
     <template id="produk-detail.html">
@@ -120,21 +114,7 @@
                     </ons-toolbar-button>
                 </div>
             </ons-toolbar>
-            <ons-card>
-                <img src="https://asset.kompas.com/crops/CHJoFQa1gAG3u2bYVXEliM_R9Mg=/120x88:920x622/750x500/data/photo/2020/09/25/5f6d572a3c1f9.jpg"
-                    class="img-detail mb-4">
-                <h4 class="mb-1"><b>Nasi Padang</b></h4>
-                <p class="mb-4">RP 15.000 </p>
-                <div class="description">
-                    <p>Nasi Padang adalah masakan khas padang yang mempunyai aroma dan rasa yang kaya akan rempah.</p>
-                    <br />
-                    <p>Inlcude:</p>
-                    <br />
-                    <p>- Nasi</p>
-                    <p>- Ikan</p>
-                    <p>- Sayur</p>
-                </div>
-            </ons-card>
+            <section id="product_detail_content"></section>
             <ons-popover id="popover-dialog" cancelable direction="down" cover-target target="#info-button">
                 <ons-list id="popover-list">
                     <ons-list-item class="more-options" tappable onclick="fn.hideDialog('popover-dialog')">
@@ -152,11 +132,10 @@
                 </div>
                 <div class="alert-dialog-footer">
                     <ons-alert-dialog-button onclick="hideAlertDialog()">Cancel</ons-alert-dialog-button>
-                    <ons-alert-dialog-button onclick="hideAlertDialog()">OK</ons-alert-dialog-button>
+                    <ons-alert-dialog-button onclick="deleteProduct(localStorage.getItem('product_id'))">OK</ons-alert-dialog-button>
                 </div>
             </ons-alert-dialog>
-            <script src="/js/produk-detail.js">
-            </script>
+            <script src="/js/produk-detail.js"></script>
         </ons-page>
     </template>
 
@@ -212,7 +191,7 @@
         </ons-page>
     </template>
     <!-- // Orderan Diantar Page -->
-    
+
     <template id="orderan-proses.html">
         <ons-page id="orderan-proses">
             <ons-card class="card-orderan" tappable
@@ -258,8 +237,7 @@
                 </div>
                 <div class="center">Pesanan</div>
                 <div class="right">
-                    <ons-toolbar-button icon="md-more-vert"
-                        onclick="fn.showDialog('popover-dialog-detail-pesanan')">
+                    <ons-toolbar-button icon="md-more-vert" onclick="fn.showDialog('popover-dialog-detail-pesanan')">
                     </ons-toolbar-button>
                 </div>
             </ons-toolbar>
@@ -277,7 +255,8 @@
                     </ons-list-item>
                 </ons-list>
             </ons-card>
-            <ons-popover id="popover-dialog-detail-pesanan" cancelable direction="down" cover-target target="#info-button">
+            <ons-popover id="popover-dialog-detail-pesanan" cancelable direction="down" cover-target
+                target="#info-button">
                 <ons-list id="popover-list">
                     <ons-list-item class="more-options" tappable onclick="fn.hideDialog('popover-dialog')">
                         <div class="center" onclick="fn.pushPage({'id': 'form-produk.html', 'act' : 'PullHook'})">Antar
@@ -332,8 +311,7 @@
         });
     </script>
 
-    <script src="/js/main.js">
-    </script>
+    <script src="/js/main.js"></script>
 
 </body>
 

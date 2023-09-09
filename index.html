@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="/libs/onsenui/css/onsenui.css">
     <link rel="stylesheet" href="/libs/onsenui/css/onsen-css-components.min.css">
     <link rel="stylesheet" href="/style.css">
+    <script>
+        localStorage.setItem('API_BASEURL', 'http://localhost:8080');
+    </script>
     <script src="/libs/onsenui/js/onsenui.min.js"></script>
     <script src="/libs/jquery/jquery.min.js"></script>
 </head>
@@ -42,22 +45,9 @@
             <ons-toolbar>
                 <div class="center">Beranda</div>
             </ons-toolbar>
-            <ons-card>
-                <div class="card-product">
-                    <div class="card-content">
-                        <img src="https://source.unsplash.com/random" alt="Onsen UI" />
-                        <div class="card-info">
-                            <div class="card-act">
-                                <button class="btn btn-tambah ms-auto"
-                                    onclick="ons.notification.toast('Berhasil ditambahkan.', { timeout: 1000})">Tambah</button>
-                            </div>
-                            <h4 class="mb-1">Nasi Padang</h4>
-                            <p class="text-muted mb-2">Nasi + Ikan</p>
-                            <p>RP 25.000</p>
-                        </div>
-                    </div>
-                </div>
-            </ons-card>
+            <ons-pull-hook id="pull-hook"></ons-pull-hook>
+            <section id="products_wraper"></section>
+            <script src="/js/user/product.js"></script>
         </ons-page>
     </template>
 
@@ -286,7 +276,8 @@
 
     <template id="proses-transaksi.html">
         <ons-page id="proses-transaksi">
-            <ons-card tappable onclick="fn.pushPage({'id': 'pesanan-transaksi.html', 'Pesanan #IUS871287A': 'PullHook'})">
+            <ons-card tappable
+                onclick="fn.pushPage({'id': 'pesanan-transaksi.html', 'Pesanan #IUS871287A': 'PullHook'})">
                 <div class="title">
                     Pesanan #8912YIAS
                 </div>
