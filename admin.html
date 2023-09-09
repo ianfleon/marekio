@@ -87,19 +87,23 @@
                         Tambah</ons-toolbar-button>
                 </div>
             </ons-toolbar>
-            <ons-card onclick="fn.pushPage({'id': 'produk-detail.html', 'Detail': 'PullHook'})">
-                <div class="card-product">
-                    <div class="card-content">
-                        <img src="https://source.unsplash.com/random" alt="Onsen UI" />
-                        <div class="card-info">
-                            <h4 class="mb-1">Nasi Padang</h4>
-                            <p>RP 25.000</p>
+            <section id="product_card_wraper">
+                <!-- <ons-card onclick="fn.pushPage({'id': 'produk-detail.html', 'Detail': 'PullHook'})">
+                    <div class="card-product">
+                        <div class="card-content">
+                            <img src="https://source.unsplash.com/random" alt="Onsen UI" />
+                            <div class="card-info">
+                                <h4 class="mb-1">Nasi Padang</h4>
+                                <p>RP 25.000</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </ons-card>
+                </ons-card> -->
+            </section>
+            <script src="/js/produk.js"></script>
         </ons-page>
     </template>
+    <!-- // Produk Page -->
 
     <!-- # Detail Produk Page -->
     <template id="produk-detail.html">
@@ -165,7 +169,7 @@
             <ons-tabbar swipeable position="top">
                 <ons-tab page="orderan-proses.html" label="Proses" active>
                 </ons-tab>
-                <ons-tab page="detail-pesanan.html" label="Diantar" active>
+                <ons-tab page="orderan-diantar.html" label="Diantar">
                 </ons-tab>
                 <ons-tab page="orderan-selesai.html" label="Selesai">
                 </ons-tab>
@@ -201,6 +205,13 @@
             </ons-card>
         </ons-page>
     </template>
+
+    <template id="orderan-diantar.html">
+        <ons-page id="orderan-diantar">
+            <p>Diantar..</p>
+        </ons-page>
+    </template>
+    <!-- // Orderan Diantar Page -->
     
     <template id="orderan-proses.html">
         <ons-page id="orderan-proses">
@@ -236,7 +247,9 @@
             Pesanan selesai
         </ons-page>
     </template>
+    <!-- // Orderan Page -->
 
+    <!-- # Detail Pesanan -->
     <template id="detail-pesanan.html">
         <ons-page id="detail-pesanan">
             <ons-toolbar>
@@ -246,11 +259,11 @@
                 <div class="center">Pesanan</div>
                 <div class="right">
                     <ons-toolbar-button icon="md-more-vert"
-                        onclick="fn.pushPage({'id': 'form-profil-pw-akun.html', 'Ganti Password': 'PullHook'})">
+                        onclick="fn.showDialog('popover-dialog-detail-pesanan')">
                     </ons-toolbar-button>
                 </div>
             </ons-toolbar>
-            <ons-card onclick="app.showFromObject()">
+            <ons-card>
                 <h4>Invoice #1298SAU</h4>
                 <ons-list>
                     <ons-list-item>
@@ -264,7 +277,7 @@
                     </ons-list-item>
                 </ons-list>
             </ons-card>
-            <ons-popover id="popover-dialog" cancelable direction="down" cover-target target="#info-button">
+            <ons-popover id="popover-dialog-detail-pesanan" cancelable direction="down" cover-target target="#info-button">
                 <ons-list id="popover-list">
                     <ons-list-item class="more-options" tappable onclick="fn.hideDialog('popover-dialog')">
                         <div class="center" onclick="fn.pushPage({'id': 'form-produk.html', 'act' : 'PullHook'})">Antar
@@ -297,6 +310,7 @@
             </script>
         </ons-page>
     </template>
+    <!-- // Detail Pesanan -->
 
     <template id="konfirmasi-pesanan-asheet.html">
         <ons-action-sheet id="sheet" cancelable title="From template">

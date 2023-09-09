@@ -1,3 +1,33 @@
+let request = indexedDB.open('marekiodb', 1);
+
+let db;
+
+// This event is only implemented in recent browsers
+request.onupgradeneeded = (event) => {
+  // Save the IDBDatabase interface
+  objectStore.createIndex("name", "name", { unique: false });
+
+  // objectStore.transaction.oncomplete = (event) => {
+  //   // Store values in the newly created objectStore.
+  //   const customerObjectStore = db
+  //     .transaction("customers", "readwrite")
+  //     .objectStore("customers");
+  //   customerData.forEach((customer) => {
+  //     customerObjectStore.add(customer);
+  //   });
+  // };
+
+};
+
+
+
+
+
+
+
+
+
+
 var infoButton = document.getElementById('info-button');
 window.fn.showDialog = function (id) {
     var elem = document.getElementById(id);
