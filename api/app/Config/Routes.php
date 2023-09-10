@@ -41,6 +41,7 @@ $routes->post('/user/add', 'User::add');
 $routes->post('/products/add', 'Product::add');
 
 $routes->post('/cart/add', 'Cart::add');
+$routes->get('/cart/delete/(:num)', 'Cart::delete/$1');
 
 /*
  * --------------------------------------------------------------------

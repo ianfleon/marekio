@@ -66,7 +66,7 @@ ons.ready(function () {
 
 function addProductToCart(idProduct)
 {
-	console.log(`ID Product: ${idProduct}`);
+	// console.log(`ID Product: ${idProduct}`);
 	$.ajax({
 		url: 'http://localhost:8080/cart/add',
 		method: 'POST',
@@ -75,7 +75,8 @@ function addProductToCart(idProduct)
 			user_xid: 18
 		},
 		success: function (res) {
-			ons.notification.toast('Berhasil ditambahkan.', { timeout: 1000});
+			initCartList();
+			ons.notification.toast(res.message, { timeout: 1000});
 		}
 	});
 

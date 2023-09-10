@@ -13,16 +13,17 @@ class Cart extends Migration
                 'type' => 'INT',
                 'auto_increment' => true
             ],
-            'user_id' => [
+            'user_xid' => [
                 'type' => 'INT',
                 'constraint' => '12'
             ],
-            'product_id' => [
+            'product_xid' => [
                 'type' => 'INT',
                 'constraint' => '12'
             ]
         ]);
-        $this->forge->addKey('cart_id');
+        
+        $this->forge->addKey('cart_id', true);
         $this->forge->createTable('cart_tb');
     }
 

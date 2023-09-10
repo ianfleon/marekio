@@ -11,7 +11,7 @@ $.ajax({
 
 function setViewDetailProduct(data) {
   const detail = `<ons-card id="card-">
-                    <img src="http://localhost:8080/img/${data.product_img}"
+                    <img src="http://localhost:8080/img/product/${data.product_img}"
                         class="img-detail mb-4">
                     <h4 class="mb-1"><b>${data.product_nama}</b></h4>
                     <p class="mb-4">RP ${data.product_harga}</p>

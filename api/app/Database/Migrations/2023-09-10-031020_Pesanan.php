@@ -22,7 +22,10 @@ class Pesanan extends Migration
             'pesanan_status' => [
                 'type' => 'INT'
             ],
-            'cart_id' => [
+            'product_xid' => [
+                'type' => 'INT'
+            ],
+            'user_xid' => [
                 'type' => 'INT'
             ]
         ]);

@@ -22,7 +22,7 @@ class User extends BaseController {
 	public function cart($id)
 	{
 		// echo "User::cart";
-		$this->cartModel->where('user_id', $id);
+		$this->cartModel->where('user_xid', $id);
 		$this->cartModel->join('products_tb', 'products_tb.product_id = cart_tb.product_xid');
 		$this->cartModel->join('users_tb', 'users_tb.user_id = cart_tb.user_xid');
 
