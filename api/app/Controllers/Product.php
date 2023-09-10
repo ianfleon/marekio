@@ -53,7 +53,7 @@ class Product extends BaseController
 
         
         $newName = $imgfile->getRandomName();
-        $imgfile->move(ROOTPATH . 'public/img', $newName);
+        $imgfile->move(ROOTPATH . 'public/img/product', $newName);
         
         $reqs['product_img'] = $newName;
 

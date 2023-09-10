@@ -6,7 +6,6 @@
 .card-product {
     display: flex;
     flex-direction: column;
-    position: relative;
 }
 
 .row {
@@ -18,14 +17,23 @@
     width: fit-content;
     border: 0;
     padding: .48rem .72rem;
-    border-radius: 7px;
+    border-radius: 5px;
 }
 
-/* .card-act {
+.btn-green {
+    background-color: #00b954;
+    color: #ffffff;
+}
+
+.card-act {
     position: absolute;
-    right: 0;
-    top: 0;
-} */
+    right: .2em;
+    top: .2em;
+}
+
+.card-product-wraper {
+    position: relative;
+}
 
 .card-content img {
     width: 142px !important;

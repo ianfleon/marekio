@@ -1,17 +1,16 @@
 function makeCardProduct(data) {
-    const card = `<ons-card>
+    const card = `<ons-card class="card-product-wraper">
+    <div class="card-act ms-auto">
+                        <button class="btn btn-green ms-auto"
+                            onclick="addProductToCart(${data.product_id})"><i class="fas fa-plus"></i></button>
+                    </div>
                 <div class="card-product">
-                    <div class="card-content mb-4">
-                        <img src="${localStorage.getItem('API_BASEURL')}/img/${data.product_img}" alt="Onsen UI" />
+                    <div class="card-content">
+                        <img src="${localStorage.getItem('API_BASEURL')}/img/product/${data.product_img}" alt="Onsen UI" />
                         <div class="card-info">
                             <h4 class="mb-1">${data.product_nama}</h4>
-                            <p class="text-muted mb-2">${data.product_desc}</p>
                             <p>RP ${data.product_harga}</p>
                         </div>
-                    </div>
-                    <div class="card-act ms-auto">
-                        <button class="btn btn-tambah ms-auto"
-                            onclick="ons.notification.toast('Berhasil ditambahkan.', { timeout: 1000})">Tambah</button>
                     </div>
                 </div>
             </ons-card>`;
@@ -64,3 +63,20 @@ ons.ready(function () {
 		setTimeout(done, 1000);
 	};
 });
+
+function addProductToCart(idProduct)
+{
+	console.log(`ID Product: ${idProduct}`);
+	$.ajax({
+		url: 'http://localhost:8080/cart/add',
+		method: 'POST',
+		data: {
+			product_xid: idProduct,
+			user_xid: 18
+		},
+		success: function (res) {
+			ons.notification.toast('Berhasil ditambahkan.', { timeout: 1000});
+		}
+	});
+
+}

@@ -107,23 +107,9 @@
                     </ons-toolbar-button>
                 </div>
             </ons-toolbar>
-            <ons-list>
-                <ons-list-item>
-                    <div class="left me-4">
-                        <i class="list-item__icon ion-md-trash me-4"
-                            onclick="ons.notification.confirm('Ingin hapus item ini?')"></i>
-                        <img class="list-item__thumbnail" src="https://source.unsplash.com/random">
-                    </div>
-                    <div class="center">
-                        <span class="list-item__title">Nasi Padang</span><span class="list-item__subtitle">15.000</span>
-                    </div>
-                    <div class="right">
-                        <div><i class="ion-ios-remove-circle-outline"></i></div>
-                        <p class="mx-4">1</p>
-                        <div><i class="ion-ios-add-circle-outline"></i></div>
-                    </div>
-                </ons-list-item>
-            </ons-list>
+            <ons-pull-hook id="pull-hook-cart"></ons-pull-hook>
+            <ons-list id="cart_item_wraper"></ons-list>
+            <script src="/js/user/cart.js"></script>
         </ons-page>
     </template>
 
