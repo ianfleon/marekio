@@ -1,14 +1,16 @@
 // console.log('user/cart.js');
 
+localStorage.setItem('X_USER_ID', 18);
+
 var initCartList = function () {
     // console.log('cart.js::initCartList()');
     $.ajax({
-        url: localStorage.getItem('API_BASEURL') + '/user/cart/18',
+        url: localStorage.getItem('API_BASEURL') + '/user/cart/' + localStorage.getItem('X_USER_ID'),
         method: 'GET',
         success: function (res) {
+            console.log(res);
             $('#cart_item_wraper').empty();
             $('ons-progress-bar').remove();
-            // console.log('Cart Data Success!');
             $.each(res.data, function (i, d) {
                 // console.log(d);
                 $('#cart_item_wraper').append(setViewCartList(d));
