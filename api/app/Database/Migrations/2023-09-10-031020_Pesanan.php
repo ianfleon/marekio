@@ -9,8 +9,13 @@ class Pesanan extends Migration
     public function up()
     {
         $this->forge->addField([
+            'pesanan_id' => [
+                'type' => 'INT',
+                'auto_increment' => true
+            ],
             'pesanan_code' => [
-                'type' => 'INT'
+                'type' => 'VARCHAR',
+                'constraint' => '16'
             ],
             'pesanan_jumlah' => [
                 'type' => 'INT'
@@ -29,7 +34,7 @@ class Pesanan extends Migration
                 'type' => 'INT'
             ]
         ]);
-
+        $this->forge->addPrimaryKey('pesanan_id');
         $this->forge->createTable('pesanan_tb');
     }
 

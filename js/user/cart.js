@@ -8,7 +8,7 @@ var initCartList = function () {
         url: localStorage.getItem('API_BASEURL') + '/user/cart/' + localStorage.getItem('X_USER_ID'),
         method: 'GET',
         success: function (res) {
-            console.log(res);
+            // console.log(res);
             $('#cart_item_wraper').empty();
             $('ons-progress-bar').remove();
             $.each(res.data, function (i, d) {
@@ -77,24 +77,49 @@ function deleteProductFromCart(productId) {
 }
 
 function checkout() {
-    
+
     const items = $('.cart_countx');
-    
+
+    let orderan = [];
+
     $.each(items, function (i, val) {
-        // console.log(val.innerHTML);
+
         const jumlah = val.innerHTML;
         const product = val.getAttribute('data-product');
-        console.log(product);
+
+        // console.log(jumlah);
+        // console.log(product);
+
+        orderan[i] = {
+            product_xid: product,
+            pesanan_jumlah: jumlah
+        }
+
     });
 
-    $('ons-progress-bar').remove();
-    const loading = `<ons-progress-bar indeterminate></ons-progress-bar>`;
+    // console.log(JSON.stringify(orderan));
 
-    $('#pull-hook-cart').after(loading);
+    // orderan = JSON.stringify(orderan);
 
-    ons.notification.toast('Checkout pesanan..', {
-        timeout: 1000
+    $.ajax({
+        url: 'http://localhost:8080/pesanan/add',
+        method: 'POST',
+        data: {
+            pesanan: orderan
+        },
+        success: function (res) {
+            console.log(res)
+        }
     });
+
+    // $('ons-progress-bar').remove();
+    // const loading = `<ons-progress-bar indeterminate></ons-progress-bar>`;
+
+    // $('#pull-hook-cart').after(loading);
+
+    // ons.notification.toast('Checkout pesanan..', {
+    //     timeout: 1000
+    // });
 
     // fn.pushPage({
     //     'id': 'transaksi.html', 'anomation': 'PullHook'

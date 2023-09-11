@@ -43,6 +43,8 @@ $routes->post('/products/add', 'Product::add');
 $routes->post('/cart/add', 'Cart::add');
 $routes->get('/cart/delete/(:num)', 'Cart::delete/$1');
 
+$routes->post('/pesanan/add', 'Pesanan::add');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
