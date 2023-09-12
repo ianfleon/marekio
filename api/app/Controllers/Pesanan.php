@@ -54,14 +54,43 @@ class Pesanan extends BaseController {
 	{
 
 		$reqs = $this->request->getGet();
-
+		
+		$this->model->join('products_tb', 'pesanan_tb.product_xid = products_tb.product_id');
+		$this->model->select(['pesanan_code', 'product_nama']);
 		$this->model->where($reqs);
+
 		$result = $this->model->find();
+
+		$ps = [];
+
+		foreach ($result as $res) {
+			// var_dump($result);
+			
+			if (!array_key_exists($res['pesanan_code'], $ps)) {
+				$ps[$res['pesanan_code']] = [];
+			}
+			
+			$ps[$res['pesanan_code']][] = $res['product_nama'];
+
+			// array_push($ps[$res['pesanan_code']], $res);
+		}
+
+		$finalResult = [];
+
+		// foreach ($ps as $k => $p) {
+		// 	// $finalResult[$k][] = $p['product_nama'];
+		// 	var_dump($p);
+		// 	for
+		// }
+
+		// var_dump($finalResult);
+
+		// exit;
 
 		return $this->respond([
 			'code' => 200,
 			'status' => 'success',
-			'data' => $result
+			'data' => $ps
 		]);
 	}
 
