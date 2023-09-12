@@ -197,6 +197,7 @@
         </ons-page>
     </template>
 
+    <!-- # Transaksi -->
     <template id="transaksi.html">
         <ons-page id="transaksi">
             <ons-toolbar>
@@ -214,49 +215,27 @@
             </ons-tabbar>
         </ons-page>
     </template>
+    <!-- // Transaksi -->
 
     <template id="proses-transaksi.html">
         <ons-page id="proses-transaksi">
-            <ons-card tappable
+            <section class="pesanan_proses_wraper">
+                <ons-card tappable
                 onclick="fn.pushPage({'id': 'pesanan-transaksi.html', 'Pesanan #IUS871287A': 'PullHook'})">
                 <div class="title">
                     Pesanan #8912YIAS
                 </div>
-                <div class="content">
+                <div id="" class="content">
                     <ons-list>
-                        <ons-list>- Ayam Bakar</ons-list>
-                        <ons-list>- Teh Manis</ons-list>
-                        <ons-list>- Bebek Suir</ons-list>
-                        <ons-list>- Jantung Pisang</ons-list>
+                        <ons-list>Ayam Bakar</ons-list>
+                        <ons-list>Teh Manis</ons-list>
+                        <ons-list>Bebek Suir</ons-list>
+                        <ons-list>Jantung Pisang</ons-list>
                     </ons-list>
                 </div>
             </ons-card>
-            <ons-card tappable>
-                <div class="title">
-                    Pesanan #8912YIAS
-                </div>
-                <div class="content">
-                    <ons-list>
-                        <ons-list>- Ayam Bakar</ons-list>
-                        <ons-list>- Teh Manis</ons-list>
-                        <ons-list>- Bebek Suir</ons-list>
-                        <ons-list>- Jantung Pisang</ons-list>
-                    </ons-list>
-                </div>
-            </ons-card>
-            <ons-card tappable>
-                <div class="title">
-                    Pesanan #8912YIAS
-                </div>
-                <div class="content">
-                    <ons-list>
-                        <ons-list>- Ayam Bakar</ons-list>
-                        <ons-list>- Teh Manis</ons-list>
-                        <ons-list>- Bebek Suir</ons-list>
-                        <ons-list>- Jantung Pisang</ons-list>
-                    </ons-list>
-                </div>
-            </ons-card>
+            </section>
+            <script src="/js/user/transaksi.js"></script>
         </ons-page>
     </template>
 

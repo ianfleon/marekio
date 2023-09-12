@@ -44,6 +44,7 @@ $routes->post('/cart/add', 'Cart::add');
 $routes->get('/cart/delete/(:num)', 'Cart::delete/$1');
 
 $routes->post('/pesanan/add', 'Pesanan::add');
+$routes->get('/pesanan/(:any)', 'Pesanan::get/$1');
 
 /*
  * --------------------------------------------------------------------

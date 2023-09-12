@@ -20,44 +20,49 @@ class Pesanan extends BaseController {
 	public function add() {
 
 		$reqs = $this->request->getPost();
-		$reqs['pesanan_code'] = strtoupper(uniqid());
-		$reqs['pesanan_created'] = time();
+		$userId = $this->request->getPost('user_xid');
+		$unicode = uniqid();
+		$timecreated = time();
 
 		foreach ($reqs['pesanan'] as $i => $v) {
 
-			// echo $i;
+			$reqs['pesanan'][$i]['pesanan_code'] = $unicode;
+			$reqs['pesanan'][$i]['pesanan_created'] = $timecreated;
+			$reqs['pesanan'][$i]['pesanan_status'] = 0;
+			$reqs['pesanan'][$i]['user_xid'] = $userId;
 
-			var_dump($reqs['pesanan'][$i]);
-
-			// $reqs['product_xid'] = $v['product_xid'];
-			// $reqs['user_xid'] = $v['user_xid'];
-
-			// if ($this->model->insert($reqs) == 0) {
-			// 	return $this->respond([
-			// 		'code' => 500,
-			// 		'message' => 'Gagal buat pesanan. Cek server.'
-			// 	]);
-			// } else {
-			// 	return $this->respond([
-			// 		'code' => 200,
-			// 		'message' => 'Pesanan berhasil diproses.'
-			// 	]);
-			// }
 		}
+		
+		$res = $this->model->insertBatch($reqs['pesanan']);
+		
+		if ($res > 0) {
+			return $this->respond([
+				'code' => 200,
+				'message' => 'Pesanan berhasil diproses.'
+			]);
+		}
+		
 
-		// var_dump($reqs);
+		return $this->respond([
+			'code' => 500,
+			'message' => 'Gagal buat pesanan. Cek server.'
+		]);
+		
+	}
 
-		// if ($this->model->insert($reqs) != 0) {
-		// 	return $this->respond([
-		// 		'code' => 500,
-		// 		'message' => 'Gagal buat pesanan. Cek server.'
-		// 	]);
-		// }
+	public function get($datas)
+	{
 
-		// return $this->respond([
-		// 	'code' => 200,
-		// 	'message' => 'Pesanan berhasil diproses.'
-		// ]);
+		$reqs = $this->request->getGet();
+
+		$this->model->where($reqs);
+		$result = $this->model->find();
+
+		return $this->respond([
+			'code' => 200,
+			'status' => 'success',
+			'data' => $result
+		]);
 	}
 
 }

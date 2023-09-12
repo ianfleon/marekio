@@ -97,33 +97,32 @@ function checkout() {
 
     });
 
-    // console.log(JSON.stringify(orderan));
-
-    // orderan = JSON.stringify(orderan);
-
     $.ajax({
         url: 'http://localhost:8080/pesanan/add',
         method: 'POST',
         data: {
-            pesanan: orderan
+            pesanan: orderan,
+            user_xid: localStorage.getItem('X_USER_ID')
         },
         success: function (res) {
-            console.log(res)
+
+            ons.notification.toast('Checkout pesanan..', {
+                timeout: 500
+            });
+
+            if (res.code == 200) {
+                $('ons-progress-bar').remove();
+                setTimeout(function() {
+                    fn.pushPage({
+                        'id': 'transaksi.html', 'anomation': 'PullHook' 
+                    });
+                }, 1000);
+            }
+
         }
     });
 
-    // $('ons-progress-bar').remove();
-    // const loading = `<ons-progress-bar indeterminate></ons-progress-bar>`;
-
-    // $('#pull-hook-cart').after(loading);
-
-    // ons.notification.toast('Checkout pesanan..', {
-    //     timeout: 1000
-    // });
-
-    // fn.pushPage({
-    //     'id': 'transaksi.html', 'anomation': 'PullHook'
-    // });
+    
 
 }
 
