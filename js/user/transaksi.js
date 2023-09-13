@@ -10,7 +10,7 @@ $.ajax({
 			const x = setViewListPesanan({
 				code: i,
 				data: v
-			});
+			}, 'fa fa-ticket');
 
 			$('#pesanan_proses_wraper').append(x);
 
@@ -18,9 +18,10 @@ $.ajax({
 	}
 });
 
-function setViewListPesanan(res)
-{
+console.log($('#pesanan_diantar_wraper'));
 
+function setViewListPesanan(res, icon)
+{
 	let list = '';
 	
 	res.data.forEach(function(l) {
@@ -29,8 +30,8 @@ function setViewListPesanan(res)
 
 	const card = `<ons-card tappable
                 onclick="fn.pushPage({'id': 'pesanan-transaksi.html', 'Pesanan #IUS871287A': 'PullHook'})">
-                <div class="title">
-                    <i class="fa fa-ticket"></i> ${res.code.toUpperCase()}
+                <div class="title fs-14pt">
+                    <i class="${icon}"></i> ${res.code.toUpperCase()}
                 </div>
                 <div id="" class="content">
                     <ons-list>

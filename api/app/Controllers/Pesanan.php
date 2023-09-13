@@ -50,13 +50,13 @@ class Pesanan extends BaseController {
 		
 	}
 
-	public function get($datas)
+	public function get()
 	{
 
 		$reqs = $this->request->getGet();
 		
 		$this->model->join('products_tb', 'pesanan_tb.product_xid = products_tb.product_id');
-		$this->model->select(['pesanan_code', 'product_nama']);
+		$this->model->select(['pesanan_code', 'pesanan_jumlah', 'product_nama']);
 		$this->model->where($reqs);
 
 		$result = $this->model->find();
@@ -72,20 +72,7 @@ class Pesanan extends BaseController {
 			
 			$ps[$res['pesanan_code']][] = $res['product_nama'];
 
-			// array_push($ps[$res['pesanan_code']], $res);
 		}
-
-		$finalResult = [];
-
-		// foreach ($ps as $k => $p) {
-		// 	// $finalResult[$k][] = $p['product_nama'];
-		// 	var_dump($p);
-		// 	for
-		// }
-
-		// var_dump($finalResult);
-
-		// exit;
 
 		return $this->respond([
 			'code' => 200,

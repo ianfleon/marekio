@@ -71,21 +71,10 @@
     <!-- # Akun Page -->
     <template id="akun.html">
         <ons-page id="akun">
-
             <ons-toolbar>
                 <div class="center">Akun</div>
             </ons-toolbar>
-
-            <ons-card>
-                <div class="d-flex flex-column-center text-center">
-                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww&w=1000&q=80"
-                        class="akun-img mb-2 me-4">
-                    <div class="akun-info">
-                        <h4 class="mb-1">Nacut Soulisa</h4>
-                        <p class="text-muted">Jln. Belmes Hila, No. 2; Dekat Benteng Amsterdam</p>
-                    </div>
-                </div>
-            </ons-card>
+            <section id="profile_detail_wraper"></section>
             <ons-card>
                 <div class="content">
                     <ons-list>
@@ -117,6 +106,7 @@
                         </ons-list-item>
                     </ons-list>
             </ons-card>
+            <script src="/js/user/akun.js"></script>
         </ons-page>
     </template>
 
@@ -134,44 +124,7 @@
                     </ons-toolbar-button>
                 </div>
             </ons-toolbar>
-            <div class="content">
-                <ons-list>
-                    <ons-list-item>
-                        <div class="left">
-                            <ons-icon icon="md-face" class="list-item__icon"></ons-icon>
-                        </div>
-                        <div class="center">
-                            Nacut Soulisa
-                        </div>
-                    </ons-list-item>
-                    <ons-list-item>
-                        <div class="left">
-                            <ons-icon icon="md-phone" class="list-item__icon"></ons-icon>
-                        </div>
-                        <div class="center">
-                            081512981278
-                        </div>
-                    </ons-list-item>
-                    <ons-list-item>
-                        <div class="left">
-                            <ons-icon icon="md-map" class="list-item__icon"></ons-icon>
-                        </div>
-                        <div class="center">
-                            Jln. Belmes, Hila
-                        </div>
-                    </ons-list-item>
-                    <ons-list-item>
-                        <div class="left">
-                            <ons-icon icon="md-key" class="list-item__icon"></ons-icon>
-                        </div>
-                        <div class="center">
-                            ****************
-                        </div>
-                    </ons-list-item>
-                </ons-list>
-                <ons-button modifier="large"
-                    onclick="fn.pushPage({'id': 'form-profil-akun.html', 'Edit Profil': 'PullHook'})">UBAH</ons-button>
-            </div>
+            <div class="content" id="detail_akun_wraper"></div>
         </ons-page>
     </template>
 
@@ -208,27 +161,34 @@
             </ons-toolbar>
 
             <ons-tabbar swipeable position="top">
-                <ons-tab page="proses-transaksi.html" label="Proses" active>
+                <ons-tab page="transaksi-proses.html" label="Proses">
                 </ons-tab>
-                <ons-tab page="selesai-transaksi.html" label="Selesai">
+                <ons-tab page="transaksi-proses.html" label="Diantar">
+                </ons-tab>
+                <ons-tab page="transaksi-selesai.html" label="Selesai">
                 </ons-tab>
             </ons-tabbar>
+            <script src="/js/user/transaksi.js"></script>
         </ons-page>
     </template>
     <!-- // Transaksi -->
 
-    <template id="proses-transaksi.html">
-        <ons-page id="proses-transaksi">
-            <section id="pesanan_proses_wraper">
-                
-            </section>
-            <script src="/js/user/transaksi.js"></script>
+    <template id="transaksi-proses.html">
+        <ons-page id="transaksi-proses">
+            <section id="pesanan_proses_wraper"></section>
         </ons-page>
     </template>
 
-    <template id="selesai-transaksi.html">
-        <ons-page id="selesai-transaksi">
-            Pesanan selesai
+    <template id="transaksi-diantar.html">
+        <ons-page id="transaksi-diantar">
+            <section id="pesanan_diantar_wraper"></section>
+        </ons-page>
+    </template>
+
+    <template id="transaksi-selesai.html">
+        <ons-page id="transaksi-selesai">
+            <section id="pesanan_selesai_wraper"></section>
+            
         </ons-page>
     </template>
 

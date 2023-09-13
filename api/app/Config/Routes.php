@@ -35,6 +35,7 @@ $routes->get('/products', 'Product::index');
 $routes->get('/products/detail/(:num)', 'Product::index/$1');
 $routes->get('/products/delete/(:num)', 'Product::delete/$1');
 $routes->get('/user/cart/(:num)', 'User::cart/$1');
+$routes->get('/user/detail/(:num)', 'User::detail/$1');
 
 $routes->post('/user/add', 'User::add');
 

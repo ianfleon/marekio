@@ -19,6 +19,19 @@ class User extends BaseController {
 		$this->cartModel = new Cart_Model();
 	}
 
+	public function detail($id)
+	{
+		$this->model->where('user_id', $id);
+		$result = $this->model->first();
+		
+		return $this->respond([
+			'code' => 200,
+			'status' => 'success',
+			'data' => $result
+		]);
+
+	}
+
 	public function cart($id)
 	{
 		// echo "User::cart";
