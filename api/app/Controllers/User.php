@@ -51,14 +51,12 @@ class User extends BaseController {
 	{
 
 		$reqs = $this->request->getPost();
-		$imgfile = $this->request->getFile('user_foto');
-
-		$newName = $imgfile->getRandomName();
-        $imgfile->move(ROOTPATH . 'public/img/user', $newName);
-        
-        $reqs['user_foto'] = $newName;
 
         $result = $this->model->insert($reqs);
+
+		var_dump($reqs);
+
+		exit;
 
         return $this->respond([
         	'status' => 200,

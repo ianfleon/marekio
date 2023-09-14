@@ -8,6 +8,8 @@
     flex-direction: column;
 }
 
+.d-block { display: block; }
+
 .row {
     display: flex;
     flex-wrap: wrap;

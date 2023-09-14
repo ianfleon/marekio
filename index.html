@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/libs/onsenui/css/onsenui.css">
     <link rel="stylesheet" href="/libs/onsenui/css/onsen-css-components.min.css">
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/css/form.css">
+    <link rel="stylesheet" href="/css/card.css">
     <script>
         localStorage.setItem('API_BASEURL', 'http://localhost:8080');
     </script>
@@ -20,7 +22,7 @@
     <ons-navigator swipeable id="appNavigator">
         <ons-page>
             <ons-splitter id="appSplitter">
-                <ons-splitter-content page="tabbar.html"></ons-splitter-content>
+                <ons-splitter-content page="akun.html"></ons-splitter-content>
             </ons-splitter>
         </ons-page>
     </ons-navigator>
@@ -181,14 +183,13 @@
 
     <template id="transaksi-diantar.html">
         <ons-page id="transaksi-diantar">
-            <section id="pesanan_diantar_wraper"></section>
+            <section id="transaksi-diantar-section"></section>
         </ons-page>
     </template>
 
     <template id="transaksi-selesai.html">
         <ons-page id="transaksi-selesai">
             <section id="pesanan_selesai_wraper"></section>
-            
         </ons-page>
     </template>
 
@@ -209,6 +210,38 @@
             <ons-card>
                 <p></p>
             </ons-card>
+        </ons-page>
+    </template>
+
+    <template id="daftar.html">
+        <ons-page id="daftar">
+            <ons-toolbar>
+                <div class="left"><ons-back-button>Kembali</ons-back-button></div>
+                <div class="center">Daftar Akun</div>
+            </ons-toolbar>
+            <section id="login-section">
+                <form action="#" class="p-4">
+                    <div class="card">
+                        <div class="mb-4">
+                            <label for="user_nama" class="d-block mb-4">Nama Lengkap</label>
+                            <input type="text" name="user_nama" id="user_nama" class="form-input"/>
+                        </div>
+                        <div class="mb-4">
+                            <label for="user_hp" class="d-block mb-4">No. HP</label>
+                            <input type="number" name="user_hp" id="user_hp" class="form-input"/>
+                        </div>
+                        <div class="mb-4">
+                            <label for="user_alamat" class="d-block mb-4">Alamat</label>
+                            <input type="text" name="user_alamat" id="user_alamat" class="form-input"/>
+                        </div>
+                        <div class="mb-4">
+                            <label for="user_pw" class="d-block mb-4">Password</label>
+                            <input type="password" name="user_pw" id="user_pw" class="form-input"/>
+                        </div>
+                        <ons-button modifier="large">Buat</ons-button>
+                    </div>
+                </form>
+            </section>
         </ons-page>
     </template>
 

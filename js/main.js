@@ -29,3 +29,25 @@ window.fn.pushPage = function (page, anim) {
         });
     }
 };
+
+ons.ready(function() {
+
+    document.addEventListener('show', function(event) {
+        // console.log(event.target.id);
+        // if (event.target.id == 'akun') {
+        //     if (!isLogin()) {
+        //         fn.pushPage({'id': 'login.html', 'anim': 'PullHook'});
+        //     }
+        // }
+    });
+
+});
+
+function isLogin() {
+    
+    if (localStorage.getItem('X_USER_ID') != null) {
+        return true;
+    }
+
+    return false;
+}

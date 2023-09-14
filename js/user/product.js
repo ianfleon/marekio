@@ -1,4 +1,5 @@
 function makeCardProduct(data) {
+
     const card = `<ons-card class="card-product-wraper">
     <div class="card-act ms-auto">
                         <button class="btn btn-green ms-auto"
@@ -31,8 +32,6 @@ function initProductsUser()
 		}
 	});
 }
-
-initProductsUser();
 
 ons.ready(function () {
 
@@ -81,3 +80,5 @@ function addProductToCart(idProduct)
 	});
 
 }
+
+initProductsUser();

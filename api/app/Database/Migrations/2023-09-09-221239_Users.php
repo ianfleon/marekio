@@ -26,7 +26,11 @@ class Users extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => '15'
             ],
-            'user_foto' => [
+            'user_jk' => [
+                'type' => 'VARCHAR',
+                'constraint' => '2'
+            ],
+            'user_pw' => [
                 'type' => 'VARCHAR',
                 'constraint' => '255'
             ]
