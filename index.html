@@ -22,7 +22,7 @@
     <ons-navigator swipeable id="appNavigator">
         <ons-page>
             <ons-splitter id="appSplitter">
-                <ons-splitter-content page="akun.html"></ons-splitter-content>
+                <ons-splitter-content page="transaksi.html"></ons-splitter-content>
             </ons-splitter>
         </ons-page>
     </ons-navigator>
@@ -81,7 +81,7 @@
                 <div class="content">
                     <ons-list>
                         <ons-list-item tappable modifier="longdivider"
-                            onclick="fn.pushPage({'id': 'profil-akun.html', 'Akun': 'PullHook'})">
+                            onclick="fn.pushPage({'id': 'akun-profil.html', 'Animation': 'PullHook'})">
                             <div class="left">
                                 <ons-icon icon="ion-ios-settings" class="list-item__icon"></ons-icon>
                             </div>
@@ -112,8 +112,8 @@
         </ons-page>
     </template>
 
-    <template id="profil-akun.html">
-        <ons-page id="profil-akun">
+    <template id="akun-profil.html">
+        <ons-page id="akun-profil">
             <ons-toolbar>
                 <div class="left">
                     <ons-back-button>Kembali</ons-back-button>
@@ -127,28 +127,50 @@
                 </div>
             </ons-toolbar>
             <div class="content" id="detail_akun_wraper"></div>
+            <script src="/js/user/akun-profil.js"></script>
         </ons-page>
     </template>
 
-    <template id="form-profil-akun.html">
-        <ons-page id="form-profil-akun">
+    <template id="akun-profil-edit.html">
+        <ons-page id="akun-profil-edit">
             <ons-toolbar>
                 <div class="left">
                     <ons-back-button>Kembali</ons-back-button>
                 </div>
                 <div class="center">Edit Profil</div>
             </ons-toolbar>
-        </ons-page>
-    </template>
-
-    <template id="form-profil-pw-akun.html">
-        <ons-page id="form-profil-pw-akun">
-            <ons-toolbar>
-                <div class="left">
-                    <ons-back-button>Kembali</ons-back-button>
-                </div>
-                <div class="center">Ganti Password</div>
-            </ons-toolbar>
+            <section id="akun-profil-edit-content-section">
+                <form>
+                    <div class="mb-4">
+                        <form action="#" class="p-4">
+                            <div class="card">
+                                <div class="mb-4">
+                                    <label for="user_nama" class="d-block mb-4 text-muted">Nama Lengkap</label>
+                                    <input type="text" name="user_nama" id="user_nama" class="form-input" />
+                                </div>
+                                <div class="mb-4">
+                                    <label for="user_hp" class="d-block mb-4 text-muted">No. HP</label>
+                                    <input type="number" name="user_hp" id="user_hp" class="form-input" />
+                                </div>
+                                <div class="mb-4">
+                                    <label class="text-muted">Jenis Kelamin</label>
+                                </div>
+                                <div class="mb-4">
+                                    <input type="radio" id="user_jk_l" name="user_jk" value="l">
+                                    <label for="user_jk_p">Laki-laki</label>
+                                    <input type="radio" id="user_jk_p" name="user_jk" value="p">
+                                    <label for="user_jk_p">Perempuan</label>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="user_alamat" class="d-block mb-4 text-muted">Alamat</label>
+                                    <input type="text" name="user_alamat" id="user_alamat" class="form-input" />
+                                </div>
+                                <ons-button modifier="large">Simpan</ons-button>
+                            </div>
+                        </form>
+                    </div>
+                </form>
+            </section>
         </ons-page>
     </template>
 
@@ -165,7 +187,7 @@
             <ons-tabbar swipeable position="top">
                 <ons-tab page="transaksi-proses.html" label="Proses">
                 </ons-tab>
-                <ons-tab page="transaksi-proses.html" label="Diantar">
+                <ons-tab page="transaksi-diantar.html" label="Diantar">
                 </ons-tab>
                 <ons-tab page="transaksi-selesai.html" label="Selesai">
                 </ons-tab>
@@ -177,19 +199,20 @@
 
     <template id="transaksi-proses.html">
         <ons-page id="transaksi-proses">
-            <section id="pesanan_proses_wraper"></section>
+            <section id="transaksi-proses-section"></section>
         </ons-page>
     </template>
 
     <template id="transaksi-diantar.html">
         <ons-page id="transaksi-diantar">
             <section id="transaksi-diantar-section"></section>
+            <script>console.log(document.getElementById("transaksi-diantar-section"));</script>
         </ons-page>
     </template>
 
     <template id="transaksi-selesai.html">
         <ons-page id="transaksi-selesai">
-            <section id="pesanan_selesai_wraper"></section>
+            <section id="transaksi-selesai-section"></section>
         </ons-page>
     </template>
 
@@ -216,7 +239,9 @@
     <template id="daftar.html">
         <ons-page id="daftar">
             <ons-toolbar>
-                <div class="left"><ons-back-button>Kembali</ons-back-button></div>
+                <div class="left">
+                    <ons-back-button>Kembali</ons-back-button>
+                </div>
                 <div class="center">Daftar Akun</div>
             </ons-toolbar>
             <section id="login-section">
@@ -224,19 +249,19 @@
                     <div class="card">
                         <div class="mb-4">
                             <label for="user_nama" class="d-block mb-4">Nama Lengkap</label>
-                            <input type="text" name="user_nama" id="user_nama" class="form-input"/>
+                            <input type="text" name="user_nama" id="user_nama" class="form-input" />
                         </div>
                         <div class="mb-4">
                             <label for="user_hp" class="d-block mb-4">No. HP</label>
-                            <input type="number" name="user_hp" id="user_hp" class="form-input"/>
+                            <input type="number" name="user_hp" id="user_hp" class="form-input" />
                         </div>
                         <div class="mb-4">
                             <label for="user_alamat" class="d-block mb-4">Alamat</label>
-                            <input type="text" name="user_alamat" id="user_alamat" class="form-input"/>
+                            <input type="text" name="user_alamat" id="user_alamat" class="form-input" />
                         </div>
                         <div class="mb-4">
                             <label for="user_pw" class="d-block mb-4">Password</label>
-                            <input type="password" name="user_pw" id="user_pw" class="form-input"/>
+                            <input type="password" name="user_pw" id="user_pw" class="form-input" />
                         </div>
                         <ons-button modifier="large">Buat</ons-button>
                     </div>

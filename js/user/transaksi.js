@@ -1,4 +1,5 @@
 function setViewListPesanan(res, icon) {
+
 	let list = '';
 
 	res.data.forEach(function (l) {
@@ -26,48 +27,63 @@ function setViewTransaksiDiantar(res) {
 	// const onspage = $(`<ons-page id="transaksi-diantar"></ons-page>`);
 	// const tmp = $(`<template id="transaksi-diantar.html"></template>`);
 
-	$.ajax({
-		url: `${localStorage.getItem('API_BASEURL')}/pesanan/get?user_xid=${localStorage.getItem('X_USER_ID')}&pesanan_status=1`,
-		method: 'GET',
-		success: function (res) {
-			$.each(res.data, function (i, v) {
-				const x = setViewListPesanan({
-					code: i,
-					data: v
-				}, 'fas fa-motorcycle');
-				console.log($('#transaksi-diantar-section').append(x));
-				// console.log(x);
-			});
-		}
-	});
 
-	console.log("diantar");
 
 }
 
-
-ons.ready(function () {
-
-	document.addEventListener("show", function (event) {
-		if (event.target.id = 'transaksi-proses') {
-			// setViewTransaksiDiantar();
-		}
-	});
-
-});
 
 $.ajax({
 	url: `${localStorage.getItem('API_BASEURL')}/pesanan/get?user_xid=${localStorage.getItem('X_USER_ID')}&pesanan_status=0`,
 	method: 'GET',
 	success: function (res) {
-		// console.log(res);
+		console.log('Transaksi->Pesanan Diproses');
+		console.log(res);
 		$.each(res.data, function (i, v) {
-			// console.log(v);
 			const x = setViewListPesanan({
 				code: i,
 				data: v
 			}, 'fa fa-ticket');
-
+			$('#transaksi-proses-section').append(x);
 		});
 	}
 });
+
+$.ajax({
+	url: `${localStorage.getItem('API_BASEURL')}/pesanan/get?user_xid=${localStorage.getItem('X_USER_ID')}&pesanan_status=1`,
+	method: 'GET',
+	success: function (res) {
+		$.each(res.data, function (i, v) {
+			const x = setViewListPesanan({
+				code: i,
+				data: v
+			}, 'fas fa-motorcycle');
+			$('#transaksi-diantar-section').append(x);
+		});
+	}
+});
+
+$.ajax({
+	url: `${localStorage.getItem('API_BASEURL')}/pesanan/get?user_xid=${localStorage.getItem('X_USER_ID')}&pesanan_status=2`,
+	method: 'GET',
+	success: function (res) {
+		$.each(res.data, function (i, v) {
+			const x = setViewListPesanan({
+				code: i,
+				data: v
+			}, 'fas fa-check');
+			$('#transaksi-selesai-section').append(x);
+		});
+	}
+});
+
+// ons.ready(function () {
+
+// 	document.addEventListener("show", function (event) {
+// 		console.log(event.target.id);
+// 		if (event.target.id == 'transaksi-diantar') {
+// 			console.log(document.getElementById("transaksi-diantar-section"));
+// 			console.log("ONS READY");
+// 		}
+// 	});
+
+// });

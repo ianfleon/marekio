@@ -1,3 +1,5 @@
+localStorage.setItem('X_USER_ID', 18);
+
 window.fn = {};
 
 window.fn.toggleMenu = function () {
