@@ -47,21 +47,46 @@ class User extends BaseController {
 		]);
 	}
 	
-	public function add()
+	public function save()
 	{
 
 		$reqs = $this->request->getPost();
-
-        $result = $this->model->insert($reqs);
-
-		var_dump($reqs);
-
-		exit;
+        $result = $this->model->save($reqs);
 
         return $this->respond([
         	'status' => 200,
-        	'messages' => 'Berhasil buat akun'
+        	'messages' => 'Berhasil simpan akun'
         ]);
+
+	}
+
+	public function login()
+	{
+		$reqs = $this->request->getPost();
+		
+		$this->model->where($reqs);
+
+		$result = $this->model->find();
+
+		// var_dump($reqs);
+		// exit;
+
+		if (count($result) > 0) {
+			return $this->respond([
+				'code' => 200,
+				'status' => 'success',
+				'message' => 'Login berhasil',
+				'data' => [
+					'user_id' => $result[0]['user_id']
+				]
+			]);
+		}
+
+		return $this->respond([
+			'code' => 404,
+			'status' => 'error',
+			'message' => 'Akun tidak ditemukan'
+		]);
 
 	}
 

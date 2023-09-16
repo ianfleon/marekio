@@ -7,7 +7,7 @@ function makeCardProduct(data) {
                     </div>
                 <div class="card-product">
                     <div class="card-content">
-                        <img src="${localStorage.getItem('API_BASEURL')}/img/product/${data.product_img}" alt="Onsen UI" />
+                        <img src="${localStorage.getItem('API_BASEURL')}/img/product/${data.product_img}"  onclick="viewDetailProduct(${data.product_id})" />
                         <div class="card-info">
                             <h4 class="mb-1">${data.product_nama}</h4>
                             <p>RP ${data.product_harga}</p>
@@ -17,6 +17,16 @@ function makeCardProduct(data) {
             </ons-card>`;
 
             return card;
+}
+
+function viewDetailProduct(id) {
+
+	localStorage.setItem('DETAIL_PRODUCT_ID', id);
+
+	fn.pushPage({
+		'id': 'produk-detail.html',
+		'Detail': 'PullHook',
+	});
 }
 
 function initProductsUser()
@@ -71,7 +81,7 @@ function addProductToCart(idProduct)
 		method: 'POST',
 		data: {
 			product_xid: idProduct,
-			user_xid: 18
+			user_xid: localStorage.getItem('X_USER_ID')
 		},
 		success: function (res) {
 			initCartList();

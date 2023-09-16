@@ -1,5 +1,3 @@
-localStorage.setItem('X_USER_ID', 18);
-
 window.fn = {};
 
 window.fn.toggleMenu = function () {
@@ -32,24 +30,29 @@ window.fn.pushPage = function (page, anim) {
     }
 };
 
-ons.ready(function() {
-
-    document.addEventListener('show', function(event) {
-        // console.log(event.target.id);
-        // if (event.target.id == 'akun') {
-        //     if (!isLogin()) {
-        //         fn.pushPage({'id': 'login.html', 'anim': 'PullHook'});
-        //     }
-        // }
-    });
-
-});
+function setUserTabbar() {
+    const t = $(`<ons-tab page="transaksi-diantar.html" label="Diantar">
+                </ons-tab>
+                <ons-tab page="transaksi-selesai.html" label="Selesai">
+                </ons-tab>`);
+    $('#mytabbar').append(t);
+}
 
 function isLogin() {
-    
+
     if (localStorage.getItem('X_USER_ID') != null) {
         return true;
     }
 
     return false;
+}
+
+function logout()
+{
+    localStorage.clear();
+    location.reload();
+}
+
+if (isLogin()) {
+    setUserTabbar();
 }

@@ -37,9 +37,11 @@ $routes->get('/products/delete/(:num)', 'Product::delete/$1');
 $routes->get('/user/cart/(:num)', 'User::cart/$1');
 $routes->get('/user/detail/(:num)', 'User::detail/$1');
 
-$routes->post('/user/add', 'User::add');
+$routes->post('/user/save', 'User::save');
+$routes->post('/user/login', 'User::login');
 
 $routes->post('/products/add', 'Product::add');
+$routes->post('/products/update', 'Product::update');
 
 $routes->post('/cart/add', 'Cart::add');
 $routes->get('/cart/delete/(:num)', 'Cart::delete/$1');
@@ -47,7 +49,8 @@ $routes->get('/cart/delete/(:num)', 'Cart::delete/$1');
 $routes->post('/pesanan/add', 'Pesanan::add');
 $routes->get('/pesanan/detail/(:any)', 'Pesanan::detail/$1');
 
-$routes->get('/pesanan/list/', 'Pesanan::get/$1');
+$routes->get('/pesanan/list/(:any)', 'Pesanan::get/$1');
+$routes->get('/pesanan/status/(:num)', 'Pesanan::status/$1');
 
 /*
  * --------------------------------------------------------------------

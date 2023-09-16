@@ -1,5 +1,3 @@
-// console.log('Page: form-product.js');
-
 function previewImage(data) {
     const imgPreview = document.getElementById('imgpreview');
 
@@ -7,42 +5,64 @@ function previewImage(data) {
     imgPreview.src = window.URL.createObjectURL(data.files[0]);
 }
 
-$('#btn_upload_img').click(function () {
-    $('#imgupload').trigger('click');
-});
+function tambahImgBaru() {
+    $('input#imguploadbaru').trigger('click');
+}
 
-$('#btn_save').click(function () {
-    // console.log('btnSave: clicked!');
-    const formData = new FormData(document.getElementById('form_product'));
+function tambahProduct() {
 
-    const fd = $('#form_product').serializeArray();
-    
-    $.each(fd, function(i, res) {
-        // console.log(res.value);
-        if (res.value == '') {
-            ons.notification.alert('Tidak boleh ada yang kosong');
-            return false;
-        }
-    });
+    const validasi = validasiFormProduct();
 
-    const productImg = $('#imgupload');
-
-    if (productImg[0].files.length < 1) {
-        ons.notification.alert('Harus ada gambar produk');
+    if (validasi.status == false) {
+        ons.notification.toast(validasi.pesan, {
+            timeout: 500
+        });
+    } else {
+        $.ajax({
+            url: 'http://localhost:8080/products/add',
+            method: 'POST',
+            data: validasi,
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            cache: false,
+            timeout: 800000,
+            success: function () {
+                ons.notification.toast('Berhasil tambah produk!', {
+                    timeout: 1000
+                });
+                document.getElementById('appNavigator').popPage();
+                initProducts();
+            }
+        });
     }
 
-    $.ajax({
-        url: 'http://localhost:8080/products/add',
-        method: 'POST',
-        data: formData,
-        enctype: 'multipart/form-data',
-        processData: false,
-        contentType: false,
-        cache: false,
-        timeout: 800000,
-        success: function () {
-            document.getElementById('appNavigator').popPage();
-            initProducts();
+
+}
+
+
+function validasiFormProduct() {
+
+    const formData = new FormData(document.getElementById('form_product'));
+
+    for (const pair of formData.entries()) {
+        if (pair[1] == '') {
+            return {
+                'status': false,
+                'pesan': 'Tidak boleh ada yang kosong!'
+            }
         }
-    });
-});
+    }
+
+    const productImg = $('#imguploadbaru');
+
+    if (productImg[0].files.length < 1) {
+        return {
+            'status': false,
+            'pesan': 'Harus pilih gambar!'
+        }
+    }
+
+    return formData;
+
+}

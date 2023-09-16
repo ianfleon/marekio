@@ -76,4 +76,27 @@ class Product extends BaseController
 
     }
 
+    public function update()
+    {
+        $reqs = $this->request->getPost();
+        $imgfile = $this->request->getFile('product_img');
+
+        if ($imgfile->getSize() > 0) {
+            $newName = $imgfile->getRandomName();
+            $imgfile->move(ROOTPATH . 'public/img/product', $newName);
+            $reqs['product_img'] = $newName;
+        }
+
+        $result = $this->model->save($reqs);
+        // var_dump($result);
+
+        if ($result) {
+            return $this->respond([
+                'code' => 200,
+                'status' => 'success',
+                'message' => 'Data berhasil diupdate'
+            ]);
+        }
+    }
+
 }

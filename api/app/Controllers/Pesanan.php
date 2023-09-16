@@ -24,15 +24,36 @@ class Pesanan extends BaseController {
 
 		$datas = $this->model->find();
 
+		var_dump($datas);
+
+		exit;
+
 		$results['products'] = $datas;
 		$results['total_product'] = count($datas);
 		$results['total_item'] = 0;
 		$results['total_harga'] = 0;
+		$results['status_pesanan'] = null;
 
 		foreach ($datas as $data) {
 			$results['total_harga'] += intval($data['pesanan_jumlah']) * intval($data['product_harga']);
 			$results['total_item'] += intval($data['pesanan_jumlah']);
+			switch (intval($data['pesanan_status'])) {
+				case 0:
+					$results['status_pesanan'] = 'Diproses';
+					break;
+				case 1:
+					$results['status_pesanan'] = 'Diantar';
+					break;
+				case 2:
+					$results['status_pesanan'] = 'Selesai';
+					break;
+				default:
+					$results['status_pesanan'] = 'Batal';
+					break;
+			}
 		}
+
+		$results['total_harga'] = number_format($results['total_harga'], 0, ",", ".");
 		
 		return $this->respond([
 			'code' => 200,
@@ -80,6 +101,7 @@ class Pesanan extends BaseController {
 		$reqs = $this->request->getGet();
 		
 		$this->model->join('products_tb', 'pesanan_tb.product_xid = products_tb.product_id');
+		// $this->model->join('users_tb', 'pesanan_tb.user_xid = users_tb.user_id');
 		$this->model->select(['pesanan_code', 'pesanan_jumlah', 'product_nama']);
 		$this->model->where($reqs);
 
@@ -87,9 +109,7 @@ class Pesanan extends BaseController {
 
 		$ps = [];
 
-		foreach ($result as $res) {
-			// var_dump($result);
-			
+		foreach ($result as $res) {			
 			if (!array_key_exists($res['pesanan_code'], $ps)) {
 				$ps[$res['pesanan_code']] = [];
 			}
@@ -102,6 +122,42 @@ class Pesanan extends BaseController {
 			'code' => 200,
 			'status' => 'success',
 			'data' => $ps
+		]);
+	}
+
+	public function status($code)
+	{
+		$reqs = $this->request->getGet();
+
+		$this->model->join('products_tb', 'pesanan_tb.product_xid = products_tb.product_id');
+		$this->model->join('users_tb', 'pesanan_tb.user_xid = users_tb.user_id');
+		// $this->model->select(['pesanan_code', 'pesanan_jumlah', 'product_nama']);
+		$this->model->where($reqs);
+
+		$result = $this->model->find();
+
+		$pc = [];
+		$u = [];
+
+		foreach ($result as $res) {
+			
+			$c = $res['pesanan_code'];
+			// $h = $res['user_hp'];
+
+			if (!array_key_exists($c, $pc)) {
+				$pc[$c] = [];
+			}
+
+			$pc[$c]['user']['nama'] = $res['user_nama'];
+			$pc[$c]['user']['alamat'] = $res['user_alamat'];
+			$pc[$c]['user']['hp'] = $res['user_hp'];
+
+		}
+
+		return $this->respond([
+			'code' => 200,
+			'status' => 'success',
+			'data' => $pc
 		]);
 	}
 

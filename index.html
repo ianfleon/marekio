@@ -1,31 +1,30 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marekio</title>
+    <title>Marekio User</title>
     <link rel="stylesheet" href="/libs/onsenui/css/onsenui.css">
     <link rel="stylesheet" href="/libs/onsenui/css/onsen-css-components.min.css">
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/css/form.css">
     <link rel="stylesheet" href="/css/card.css">
-    <script>
-        localStorage.setItem('API_BASEURL', 'http://localhost:8080');
-    </script>
     <script src="/libs/onsenui/js/onsenui.min.js"></script>
     <script src="/libs/jquery/jquery.min.js"></script>
+    <script src="/config.js"></script>
 </head>
 
 <body>
 
+    <!-- # App Navigator -->
     <ons-navigator swipeable id="appNavigator">
         <ons-page>
             <ons-splitter id="appSplitter">
-                <ons-splitter-content page="transaksi-detail.html"></ons-splitter-content>
+                <ons-splitter-content page="tabbar.html"></ons-splitter-content>
             </ons-splitter>
         </ons-page>
     </ons-navigator>
+    <!-- // App Navigator -->
 
     <!-- Routers (Tabbar) -->
     <template id="tabbar.html">
@@ -53,6 +52,22 @@
         </ons-page>
     </template>
 
+    <!-- # Product Detail Page -->
+    <template id="produk-detail.html">
+        <ons-page id="produk-detail">
+            <ons-toolbar>
+                <div class="left">
+                    <ons-back-button>Kembali</ons-back-button>
+                </div>
+                <div class="center">
+                    Detail
+                </div>
+            </ons-toolbar>
+            <section id="product_detail_content"></section>
+            <script src="/js/user/product-detail.js"></script>
+        </ons-page>
+    </template>
+
     <!-- # Keranjang Page -->
     <template id="keranjang.html">
         <ons-page id="keranjang">
@@ -76,7 +91,8 @@
             <ons-toolbar>
                 <div class="center">Akun</div>
             </ons-toolbar>
-            <section id="profile_detail_wraper"></section>
+            <ons-pull-hook id="pull-hook-akun"></ons-pull-hook>
+            <section id="profil-info-section"></section>
             <ons-card>
                 <div class="content">
                     <ons-list>
@@ -98,7 +114,7 @@
                                 Transaksi
                             </div>
                         </ons-list-item>
-                        <ons-list-item tappable modifier="longdivider">
+                        <ons-list-item tappable modifier="longdivider" onclick="logout()">
                             <div class="left">
                                 <ons-icon icon="ion-ios-log-out" class="list-item__icon"></ons-icon>
                             </div>
@@ -119,58 +135,27 @@
                     <ons-back-button>Kembali</ons-back-button>
                 </div>
                 <div class="center">Profil</div>
-                <div class="right">
+                <!-- <div class="right">
                     <ons-toolbar-button
                         onclick="fn.pushPage({'id': 'form-profil-pw-akun.html', 'Ganti Password': 'PullHook'})">
                         Ganti Password
                     </ons-toolbar-button>
-                </div>
+                </div> -->
             </ons-toolbar>
             <div class="content" id="detail_akun_wraper"></div>
             <script src="/js/user/akun-profil.js"></script>
         </ons-page>
     </template>
 
-    <template id="akun-profil-edit.html">
-        <ons-page id="akun-profil-edit">
+    <template id="form-akun.html">
+        <ons-page id="form-akun">
             <ons-toolbar>
                 <div class="left">
                     <ons-back-button>Kembali</ons-back-button>
                 </div>
                 <div class="center">Edit Profil</div>
             </ons-toolbar>
-            <section id="akun-profil-edit-content-section">
-                <form>
-                    <div class="mb-4">
-                        <form action="#" class="p-4">
-                            <div class="card">
-                                <div class="mb-4">
-                                    <label for="user_nama" class="d-block mb-4 text-muted">Nama Lengkap</label>
-                                    <input type="text" name="user_nama" id="user_nama" class="form-input" />
-                                </div>
-                                <div class="mb-4">
-                                    <label for="user_hp" class="d-block mb-4 text-muted">No. HP</label>
-                                    <input type="number" name="user_hp" id="user_hp" class="form-input" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="text-muted">Jenis Kelamin</label>
-                                </div>
-                                <div class="mb-4">
-                                    <input type="radio" id="user_jk_l" name="user_jk" value="l">
-                                    <label for="user_jk_p">Laki-laki</label>
-                                    <input type="radio" id="user_jk_p" name="user_jk" value="p">
-                                    <label for="user_jk_p">Perempuan</label>
-                                </div>
-                                <div class="mb-4">
-                                    <label for="user_alamat" class="d-block mb-4 text-muted">Alamat</label>
-                                    <input type="text" name="user_alamat" id="user_alamat" class="form-input" />
-                                </div>
-                                <ons-button modifier="large">Simpan</ons-button>
-                            </div>
-                        </form>
-                    </div>
-                </form>
-            </section>
+            <section id="form-akun-section"></section>
         </ons-page>
     </template>
 
@@ -182,17 +167,18 @@
                     <ons-back-button>Kembali</ons-back-button>
                 </div>
                 <div class="center">Transaksi</div>
+                <div class="right">
+                    <ons-toolbar-button id="btn-refresh-transaksi" onclick="initTransaksi()">Refresh</ons-toolbar-button>
+                </div>
             </ons-toolbar>
-
-            <ons-tabbar swipeable position="top">
+            <ons-tabbar swipeable position="top" id="mytabbar">
                 <ons-tab page="transaksi-proses.html" label="Proses">
                 </ons-tab>
-                <ons-tab page="transaksi-diantar.html" label="Diantar">
+                <ons-tab page="transaksi-diantar.html" label="Proses">
                 </ons-tab>
-                <ons-tab page="transaksi-selesai.html" label="Selesai">
+                <ons-tab page="transaksi-selesai.html" label="Proses">
                 </ons-tab>
             </ons-tabbar>
-            <script src="/js/user/transaksi.js"></script>
         </ons-page>
     </template>
     <!-- // Transaksi -->
@@ -206,7 +192,6 @@
     <template id="transaksi-diantar.html">
         <ons-page id="transaksi-diantar">
             <section id="transaksi-diantar-section"></section>
-            <script>console.log(document.getElementById("transaksi-diantar-section"));</script>
         </ons-page>
     </template>
 
@@ -222,107 +207,41 @@
                 <div class="left">
                     <ons-back-button>Kembali</ons-back-button>
                 </div>
-                <div class="center">Profil</div>
+                <div class="center">Detail Pesanan</div>
             </ons-toolbar>
-            <div class="card">
-            <ons-list class="mb-4">
-                <ons-list-item>
-                  <div class="left">
-                    <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
-                  </div>
-                  <div class="center">
-                    <span class="list-item__title">Nasi Ayam Bakar</span><span class="list-item__subtitle">2 X RP 12.000</span>
-                  </div>
-                </ons-list-item>
-                <ons-list-item>
-                  <div class="left">
-                    <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
-                  </div>
-                  <div class="center">
-                    <span class="list-item__title">Nasi Ayam Bakar</span><span class="list-item__subtitle">2 X RP 12.000</span>
-                  </div>
-                </ons-list-item>
-            </ons-list>
-            <div class="d-flex">
-                <div class="me-auto text-muted">
-                    Jumlah Pesanan:
-                </div>
-                <div class="ms-auto">4 Item</div>
-            </div>
-            <div class="d-flex">
-                <div class="me-auto text-muted">
-                    Total Harga:
-                </div>
-                <div class="ms-auto">RP 48.000</div>
-            </div>
-            </div>
+            <section id="detail-pesanan-section"></section>
+            <script src="/js/user/detail-pesanan.js"></script>
         </ons-page>
     </template>
 
-    <template id="pesanan-transaksi.html">
-        <ons-page id="pesanan-transaksi">
+    <template id="login.html">
+        <ons-page id="login">
             <ons-toolbar>
                 <div class="left">
-                    <ons-back-button>Kembali</ons-back-button>
+                    <ons-back-button id="btn-back-login" onclick="location.reload()">Kembali</ons-back-button>
                 </div>
-                <div class="center">Pesanan</div>
-                <div class="right">
-                    <ons-toolbar-button
-                        onclick="fn.pushPage({'id': 'form-profil-pw-akun.html', 'Ganti Password': 'PullHook'})">
-                        Chat
-                    </ons-toolbar-button>
-                </div>
-            </ons-toolbar>
-            <ons-card>
-                <p></p>
-            </ons-card>
-        </ons-page>
-    </template>
-
-    <template id="daftar.html">
-        <ons-page id="daftar">
-            <ons-toolbar>
-                <div class="left">
-                    <ons-back-button>Kembali</ons-back-button>
-                </div>
-                <div class="center">Daftar Akun</div>
+                <div class="center">Login</div>
             </ons-toolbar>
             <section id="login-section">
-                <form action="#" class="p-4">
-                    <div class="card">
+                <div class="card">
+                    <form action="#" id="form-login">
                         <div class="mb-4">
-                            <label for="user_nama" class="d-block mb-4">Nama Lengkap</label>
-                            <input type="text" name="user_nama" id="user_nama" class="form-input" />
+                            <input type="number" name="user_hp" class="form-input" placeholder="No HP"/>
                         </div>
                         <div class="mb-4">
-                            <label for="user_hp" class="d-block mb-4">No. HP</label>
-                            <input type="number" name="user_hp" id="user_hp" class="form-input" />
+                            <input type="password" name="user_pw" class="form-input" placeholder="Password"/>
                         </div>
-                        <div class="mb-4">
-                            <label for="user_alamat" class="d-block mb-4">Alamat</label>
-                            <input type="text" name="user_alamat" id="user_alamat" class="form-input" />
-                        </div>
-                        <div class="mb-4">
-                            <label for="user_pw" class="d-block mb-4">Password</label>
-                            <input type="password" name="user_pw" id="user_pw" class="form-input" />
-                        </div>
-                        <ons-button modifier="large">Buat</ons-button>
-                    </div>
-                </form>
+                        <ons-button modifier="large" onclick="submitLogin()">Masuk</ons-button>
+                    </form>
+                </div>
             </section>
+            <script src="/js/user/login.js"></script>
         </ons-page>
     </template>
 
-    <script>
-        document.addEventListener('init', function (event) {
-
-            // Current Page Active
-            var page = event.target;
-
-        });
-    </script>
-
     <script src="/js/main.js"></script>
+    <script src="/js/user/transaksi.js"></script>
+
 </body>
 
 </html>

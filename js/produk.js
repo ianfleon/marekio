@@ -32,7 +32,7 @@ function createProductCard(data) {
 
 function viewDetailProduct(id) {
 
-	localStorage.setItem('product_id', id);
+	localStorage.setItem('PRODUCT_DETAIL_ID', id);
 
 	fn.pushPage({
 		'id': 'produk-detail.html',

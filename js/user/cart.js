@@ -1,7 +1,3 @@
-// console.log('user/cart.js');
-
-localStorage.setItem('X_USER_ID', 18);
-
 var initCartList = function () {
     // console.log('cart.js::initCartList()');
     $.ajax({
@@ -30,7 +26,7 @@ function setViewCartList(data) {
                         <img class="list-item__thumbnail" src="${localStorage.getItem('API_BASEURL')}/img/product/${data.product_img}">
                     </div>
                     <div class="center">
-                        <span class="list-item__title">${data.product_nama}</span><span class="list-item__subtitle">15.000</span>
+                        <span class="list-item__title">${data.product_nama}</span><span class="list-item__subtitle">${data.product_harga}</span>
                     </div>
                     <div class="right">
                         <div onclick="minCartItem('cart_item_count_idx${data.product_id}')"><i class="ion-ios-remove-circle-outline"></i></div>
@@ -111,7 +107,7 @@ function checkout() {
             });
 
             if (res.code == 200) {
-                $('ons-progress-bar').remove();
+                // $('ons-progress-bar').remove();
                 setTimeout(function() {
                     fn.pushPage({
                         'id': 'transaksi.html', 'anomation': 'PullHook' 
@@ -156,5 +152,6 @@ ons.ready(function () {
     };
 });
 
-
-initCartList();
+if (isLogin()) {
+    initCartList();
+}
