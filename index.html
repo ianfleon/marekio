@@ -22,7 +22,7 @@
     <ons-navigator swipeable id="appNavigator">
         <ons-page>
             <ons-splitter id="appSplitter">
-                <ons-splitter-content page="transaksi.html"></ons-splitter-content>
+                <ons-splitter-content page="transaksi-detail.html"></ons-splitter-content>
             </ons-splitter>
         </ons-page>
     </ons-navigator>
@@ -213,6 +213,49 @@
     <template id="transaksi-selesai.html">
         <ons-page id="transaksi-selesai">
             <section id="transaksi-selesai-section"></section>
+        </ons-page>
+    </template>
+
+    <template id="transaksi-detail.html">
+        <ons-page id="transaksi-detail">
+            <ons-toolbar>
+                <div class="left">
+                    <ons-back-button>Kembali</ons-back-button>
+                </div>
+                <div class="center">Profil</div>
+            </ons-toolbar>
+            <div class="card">
+            <ons-list class="mb-4">
+                <ons-list-item>
+                  <div class="left">
+                    <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
+                  </div>
+                  <div class="center">
+                    <span class="list-item__title">Nasi Ayam Bakar</span><span class="list-item__subtitle">2 X RP 12.000</span>
+                  </div>
+                </ons-list-item>
+                <ons-list-item>
+                  <div class="left">
+                    <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
+                  </div>
+                  <div class="center">
+                    <span class="list-item__title">Nasi Ayam Bakar</span><span class="list-item__subtitle">2 X RP 12.000</span>
+                  </div>
+                </ons-list-item>
+            </ons-list>
+            <div class="d-flex">
+                <div class="me-auto text-muted">
+                    Jumlah Pesanan:
+                </div>
+                <div class="ms-auto">4 Item</div>
+            </div>
+            <div class="d-flex">
+                <div class="me-auto text-muted">
+                    Total Harga:
+                </div>
+                <div class="ms-auto">RP 48.000</div>
+            </div>
+            </div>
         </ons-page>
     </template>
 

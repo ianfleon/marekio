@@ -33,7 +33,7 @@ function setViewTransaksiDiantar(res) {
 
 
 $.ajax({
-	url: `${localStorage.getItem('API_BASEURL')}/pesanan/get?user_xid=${localStorage.getItem('X_USER_ID')}&pesanan_status=0`,
+	url: `${localStorage.getItem('API_BASEURL')}/pesanan/list/get?user_xid=${localStorage.getItem('X_USER_ID')}&pesanan_status=0`,
 	method: 'GET',
 	success: function (res) {
 		console.log('Transaksi->Pesanan Diproses');
@@ -49,7 +49,7 @@ $.ajax({
 });
 
 $.ajax({
-	url: `${localStorage.getItem('API_BASEURL')}/pesanan/get?user_xid=${localStorage.getItem('X_USER_ID')}&pesanan_status=1`,
+	url: `${localStorage.getItem('API_BASEURL')}/pesanan/list/get?user_xid=${localStorage.getItem('X_USER_ID')}&pesanan_status=1`,
 	method: 'GET',
 	success: function (res) {
 		$.each(res.data, function (i, v) {
@@ -63,7 +63,7 @@ $.ajax({
 });
 
 $.ajax({
-	url: `${localStorage.getItem('API_BASEURL')}/pesanan/get?user_xid=${localStorage.getItem('X_USER_ID')}&pesanan_status=2`,
+	url: `${localStorage.getItem('API_BASEURL')}/pesanan/list/get?user_xid=${localStorage.getItem('X_USER_ID')}&pesanan_status=2`,
 	method: 'GET',
 	success: function (res) {
 		$.each(res.data, function (i, v) {

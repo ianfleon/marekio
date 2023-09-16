@@ -17,6 +17,30 @@ class Pesanan extends BaseController {
 		$this->model = new Pesanan_Model();
 	}
 
+	public function detail($code)
+	{
+		$this->model->join('products_tb', 'products_tb.product_id = pesanan_tb.product_xid');
+		$this->model->where('pesanan_code', $code);
+
+		$datas = $this->model->find();
+
+		$results['products'] = $datas;
+		$results['total_product'] = count($datas);
+		$results['total_item'] = 0;
+		$results['total_harga'] = 0;
+
+		foreach ($datas as $data) {
+			$results['total_harga'] += intval($data['pesanan_jumlah']) * intval($data['product_harga']);
+			$results['total_item'] += intval($data['pesanan_jumlah']);
+		}
+		
+		return $this->respond([
+			'code' => 200,
+			'status' => 'success',
+			'data' => $results
+		]);
+	}
+
 	public function add() {
 
 		$reqs = $this->request->getPost();
