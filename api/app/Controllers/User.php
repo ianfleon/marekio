@@ -54,8 +54,35 @@ class User extends BaseController {
         $result = $this->model->save($reqs);
 
         return $this->respond([
-        	'status' => 200,
+        	'code' => 200,
+			'status' => 'success',
         	'messages' => 'Berhasil simpan akun'
+        ]);
+
+	}
+
+	public function add()
+	{
+
+		$reqs = $this->request->getPost();
+
+		$this->model->where('user_hp', $reqs['user_hp']);
+		$isExits = $this->model->find();
+
+		if (count($isExits) > 0) {
+			return $this->respond([
+				'code' => 500,
+				'status' => 'error',
+				'message' => 'Nomor sudah digunakan'
+			]);
+		}
+
+		$result = $this->model->insert($reqs);
+
+        return $this->respond([
+        	'code' => 200,
+			'status' => 'success',
+        	'message' => 'Berhasil simpan akun'
         ]);
 
 	}

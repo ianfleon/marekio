@@ -38,6 +38,7 @@ $routes->get('/user/cart/(:num)', 'User::cart/$1');
 $routes->get('/user/detail/(:num)', 'User::detail/$1');
 
 $routes->post('/user/save', 'User::save');
+$routes->post('/user/add', 'User::add');
 $routes->post('/user/login', 'User::login');
 
 $routes->post('/products/add', 'Product::add');

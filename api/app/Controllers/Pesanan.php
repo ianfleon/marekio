@@ -24,10 +24,6 @@ class Pesanan extends BaseController {
 
 		$datas = $this->model->find();
 
-		var_dump($datas);
-
-		exit;
-
 		$results['products'] = $datas;
 		$results['total_product'] = count($datas);
 		$results['total_item'] = 0;
