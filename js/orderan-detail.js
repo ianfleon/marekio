@@ -52,8 +52,8 @@ $.ajax({
     url: localStorage.getItem('API_BASEURL') + '/pesanan/detail/' + localStorage.getItem('ORDERAN_DETAIL_CODE'),
     method: 'GET',
     success: function(res) {
-      console.log(res);
-      console.log(localStorage.getItem('ORDERAN_DETAIL_CODE'));
+    //   console.log(res);
+    //   console.log(localStorage.getItem('ORDERAN_DETAIL_CODE'));
       initDetailOrderan(res.data);
     }
 });

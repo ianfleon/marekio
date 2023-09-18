@@ -221,6 +221,9 @@
                     <ons-back-button id="btn-back-login" onclick="location.reload()">Kembali</ons-back-button>
                 </div>
                 <div class="center">Login</div>
+                <div class="right">
+                    <ons-toolbar-button onclick="fn.pushPage({'id':'daftar.html', 'anim':'PullHook'})">Daftar</ons-toolbar-button>
+                </div>
             </ons-toolbar>
             <section id="login-section">
                 <div class="card">
@@ -236,6 +239,46 @@
                 </div>
             </section>
             <script src="/js/user/login.js"></script>
+        </ons-page>
+    </template>
+
+    <template id="daftar.html">
+        <ons-page id="daftar">
+            <ons-toolbar>
+                <div class="left">
+                    <ons-back-button id="btn-back-login" onclick="location.reload()">Kembali</ons-back-button>
+                </div>
+                <div class="center">Daftar</div>
+                <div class="right">
+                    <ons-toolbar-button onclick="fn.pushPage({'id':'login.html', 'anim':'PullHook'})">Login</ons-toolbar-button>
+                </div>
+            </ons-toolbar>
+            <section id="login-section">
+                <div class="card">
+                    <form action="#" id="form-daftar">
+                        <div class="mb-4">
+                            <input type="text" name="user_nama" class="form-input" placeholder="Nama Lengkap"/>
+                        </div>
+                        <div class="mb-4">
+                            <input type="text" name="user_alamat" class="form-input" placeholder="Alamat"/>
+                        </div>
+                        <div class="mb-4">
+                            <input type="radio" name="user_jk" id="user_jk_l" value="l"/>
+                            <label for="user_jk_l">Laki-laki</label>
+                            <input type="radio" name="user_jk" id="user_jk_p" value="p"/>
+                            <label for="user_jk_p">Perempuan</label>
+                        </div>
+                        <div class="mb-4">
+                            <input type="number" name="user_hp" class="form-input" placeholder="No. HP"/>
+                        </div>
+                        <div class="mb-4">
+                            <input type="password" name="user_pw" class="form-input" placeholder="Password"/>
+                        </div>
+                        <ons-button modifier="large" onclick="submitDaftar()">Buat</ons-button>
+                    </form>
+                </div>
+            </section>
+            <script src="/js/user/daftar.js"></script>
         </ons-page>
     </template>
 

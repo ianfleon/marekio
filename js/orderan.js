@@ -2,18 +2,17 @@ $.ajax({
     url: localStorage.getItem('API_BASEURL') + '/pesanan/status/0',
     method: 'GET',
     success: function(res) {
-        // console.log(res);
         setListOrderan(res);
     }
 });
 
 function setListOrderan(res) {
 
-    console.log(res);
+    // console.log(res);
 
-    $.each(res.data, function(i, v) {
+    $.each(res.data, function(i, v) {   
         const card = `<ons-card class="card-orderan" tappable
-                onclick="detailOrderan(i)">
+                onclick="detailOrderan('${i}')">
                 <div class="title"># ${i.toUpperCase()}</div>
                 <div class="content">
                     <p><b>${v.user.nama}</b></p>
