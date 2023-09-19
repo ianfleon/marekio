@@ -21,12 +21,14 @@ function submitDaftar() {
             success: function(res) {
                 console.log(res);
                 ons.notification.toast(res.message, {
-                    timeout: 1000
+                    timeout: 1500
                 });
-                fn.pushPage({
-                    'id': 'login.html',
-                    'anim': 'PullHook'
-                });
+                if (res.code == 200) {
+                    fn.pushPage({
+                        'id': 'login.html',
+                        'anim': 'PullHook'
+                    });
+                }
             }
         });
     }

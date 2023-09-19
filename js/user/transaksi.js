@@ -1,4 +1,26 @@
-localStorage.setItem('STATUS_INIT_TRANSAKSI', 0);
+// localStorage.setItem('STATUS_INIT_TRANSAKSI', 0);
+
+class Transaksi {
+
+	setItems(dataItem) {
+		console.log(dataItem);
+		$.ajax({
+			url: `${localStorage.getItem('API_BASEURL')}/pesanan/list/get?user_xid=${localStorage.getItem('X_USER_ID')}&pesanan_status=${dataItem.status}`,
+			method: 'GET',
+			success: function (res) {
+				$(dataItem.wraper).empty();
+				$.each(res.data, function (i, v) {
+					const x = setViewListPesanan({
+						code: i,
+						data: v
+					}, dataItem.icon);
+					$(dataItem.wraper).append(x);
+				});
+			}
+		});
+	}
+
+}
 
 function setViewListPesanan(res, icon) {
 
@@ -31,71 +53,47 @@ function setViewDetailPesanan(c) {
 	});
 }
 
-
-
 function initTransaksi() {
 
-	$.ajax({
-		url: `${localStorage.getItem('API_BASEURL')}/pesanan/list/get?user_xid=${localStorage.getItem('X_USER_ID')}&pesanan_status=0`,
-		method: 'GET',
-		success: function (res) {
-			$('#transaksi-proses-section').empty();
-			$.each(res.data, function (i, v) {
-				const x = setViewListPesanan({
-					code: i,
-					data: v
-				}, 'fa fa-ticket');
-				$('#transaksi-proses-section').append(x);
-			});
-		}
-	});
+	console.log('initTransaksi()');
 
-	$.ajax({
-		url: `${localStorage.getItem('API_BASEURL')}/pesanan/list/get?user_xid=${localStorage.getItem('X_USER_ID')}&pesanan_status=2`,
-		method: 'GET',
-		success: function (res) {
-			$('#transaksi-selesai-section').empty();
-			$.each(res.data, function (i, v) {
-				const x = setViewListPesanan({
-					code: i,
-					data: v
-				}, 'fas fa-check');
-				$('#transaksi-selesai-section').append(x);
-			});
-		}
-	});
+	ons.ready(function () {
+		document.addEventListener("show", function (event) {
 
-	$.ajax({
-		url: `${localStorage.getItem('API_BASEURL')}/pesanan/list/get?user_xid=${localStorage.getItem('X_USER_ID')}&pesanan_status=1`,
-		method: 'GET',
-		success: function (res) {
-			$('#transaksi-diantar-section').empty();
-			$.each(res.data, function (i, v) {
-				const x = setViewListPesanan({
-					code: i,
-					data: v
-				}, 'fas fa-motorcycle');
-				$('#transaksi-diantar-section').append(x);
-			});
-		}
+			const page = event.target.id;
+
+			// console.log(page);
+
+			const transaksi = new Transaksi();
+
+			switch (page) {
+				case 'transaksi-proses':
+					transaksi.setItems({
+						status: 0,
+						wraper: '#transaksi-proses-section',
+						icon: 'fa fa-ticket'
+					});
+					break;
+				case 'transaksi-diantar':
+					transaksi.setItems({
+						status: 1,
+						wraper: '#transaksi-diantar-section',
+						icon: 'fas fa-motorcycle'
+					});
+					break;
+				case 'transaksi-selesai':
+					transaksi.setItems({
+						status: 2,
+						wraper: '#transaksi-selesai-section',
+						icon: 'fas fa-check'
+					});
+					break;
+			}
+		});
+
 	});
 }
 
-ons.ready(function () {
-
-	document.addEventListener("show", function (event) {
-		if (event.target.id == 'transaksi') {
-			if (localStorage.getItem('STATUS_INIT_TRANSAKSI') < 1) {
-				setTimeout(() => {
-					localStorage.setItem('STATUS_INIT_TRANSAKSI', 1);
-					initTransaksi();
-				}, 1000);
-			}
-
-		}
-	});
-
-});
 
 if (isLogin()) {
 	initTransaksi();

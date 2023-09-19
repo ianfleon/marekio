@@ -123,14 +123,16 @@ class Pesanan extends BaseController {
 
 	public function status($code)
 	{
-		$reqs = $this->request->getGet();
 
 		$this->model->join('products_tb', 'pesanan_tb.product_xid = products_tb.product_id');
 		$this->model->join('users_tb', 'pesanan_tb.user_xid = users_tb.user_id');
 		// $this->model->select(['pesanan_code', 'pesanan_jumlah', 'product_nama']);
-		$this->model->where($reqs);
+		$this->model->where('pesanan_status', intval($code));
 
 		$result = $this->model->find();
+
+		// var_dump($result);
+		// exit;
 
 		$pc = [];
 		$u = [];
@@ -154,6 +156,23 @@ class Pesanan extends BaseController {
 			'code' => 200,
 			'status' => 'success',
 			'data' => $pc
+		]);
+	}
+
+	public function change()
+	{
+		$reqs = $this->request->getPost();
+		
+		$this->model->set('pesanan_status', $reqs['pesanan_status'], false);
+		$this->model->where('pesanan_code', $reqs['pesanan_code']);
+		$this->model->update();
+
+		error_reporting(1);
+
+		return $this->respond([
+			'code' => 200,
+			'status' => 'success',
+			'message' => 'Status pesanan berubah'
 		]);
 	}
 

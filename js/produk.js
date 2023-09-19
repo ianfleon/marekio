@@ -3,7 +3,7 @@
 function initProducts()
 {	
 	$.ajax({
-		url: 'http://localhost:8080/products',
+		url: localStorage.getItem('API_BASEURL') + '/products',
 		method: 'GET',
 		success: function (res) {
 			$('#product_card_wraper').empty();
@@ -19,7 +19,7 @@ function createProductCard(data) {
 	const card = $(`<ons-card onclick="viewDetailProduct(${data.product_id})">
                     <div class="card-product">
                         <div class="card-content">
-                            <img src="http://localhost:8080/img/product/${data.product_img}" />
+                            <img src="${localStorage.getItem('API_BASEURL')}/img/product/${data.product_img}" />
                             <div class="card-info">
                                 <h4 class="mb-1">${data.product_nama}</h4>
                                 <p>RP ${data.product_harga}</p>

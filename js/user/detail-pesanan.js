@@ -43,7 +43,7 @@ $.ajax({
     url: localStorage.getItem('API_BASEURL') + '/pesanan/detail/' + localStorage.getItem('DETAIL_PESANAN_CODE'),
     method: 'GET',
     success: function(res) {
-        console.log(res);
+        // console.log(res);
         initDetailPesanan(res.data);
     }
 });

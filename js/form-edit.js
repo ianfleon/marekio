@@ -52,7 +52,7 @@ function updateProduct() {
         });
     } else {
         $.ajax({
-            url: 'http://localhost:8080/products/update',
+            url: localStorage.getItem('API_BASEURL') + '/products/update',
             method: 'POST',
             data: validasi,
             enctype: 'multipart/form-data',

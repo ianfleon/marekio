@@ -91,9 +91,9 @@ function setViewFormEditAkun(data) {
 
 function saveFormAkun() {
     const formData = new FormData(document.getElementById('form-akun-edit'));
-    console.log(formData);
+    // console.log(formData);
     $.ajax({
-        url: 'http://localhost:8080/user/save',
+        url: localStorage.getItem('API_BASEURL')+'/user/save',
         method: 'POST',
         data: formData,
         processData: false,
@@ -114,7 +114,7 @@ function saveFormAkun() {
 }
 
 function initAkun() {
-    console.log('initAkun()');
+    // console.log('initAkun()');
     $.ajax({
         url: localStorage.getItem('API_BASEURL') + '/user/detail/' + localStorage.getItem('X_USER_ID'),
         method: 'GET',

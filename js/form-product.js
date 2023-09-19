@@ -19,7 +19,7 @@ function tambahProduct() {
         });
     } else {
         $.ajax({
-            url: 'http://localhost:8080/products/add',
+            url: localStorage.getItem('API_BASEURL') + '/products/add',
             method: 'POST',
             data: validasi,
             enctype: 'multipart/form-data',

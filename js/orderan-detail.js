@@ -57,3 +57,24 @@ $.ajax({
       initDetailOrderan(res.data);
     }
 });
+
+function changePesananStatus(s) {
+    $.ajax({
+            url: localStorage.getItem('API_BASEURL') + '/pesanan/change',
+            method: 'POST',
+            data: {
+                'pesanan_code' : localStorage.getItem('ORDERAN_DETAIL_CODE'),
+                'pesanan_status' : s
+            },
+            success: function (res) {
+                console.log(res);
+                if (res.code == 200) {
+                    ons.notification.toast('Pesanan diantar!', {
+                        timeout: 1000
+                    });
+                    document.getElementById('appNavigator').popPage();
+                    initProducts();
+                }
+            }
+        });
+}

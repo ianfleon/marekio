@@ -1,7 +1,7 @@
 function initDetailProduct() {
 
     $.ajax({
-        url: 'http://localhost:8080/products/detail/' + localStorage.getItem('PRODUCT_DETAIL_ID'),
+        url: localStorage.getItem('API_BASEURL') + '/products/detail/' + localStorage.getItem('PRODUCT_DETAIL_ID'),
         method: 'GET',
         success: function (res) {
             // console.log(res);
@@ -12,7 +12,7 @@ function initDetailProduct() {
 
 function setViewDetailProduct(data) {
     const detail = `<ons-card id="card-">
-                    <img src="http://localhost:8080/img/product/${data.product_img}"
+                    <img src="${localStorage.getItem('API_BASEURL')}/img/product/${data.product_img}"
                         class="img-detail mb-4">
                     <h4 class="mb-1"><b>${data.product_nama}</b></h4>
                     <p class="mb-4">RP ${data.product_harga}</p>
@@ -26,7 +26,7 @@ function setViewDetailProduct(data) {
 function deleteProduct(id) {
 
     $.ajax({
-        url: 'http://localhost:8080/products/delete/' + id,
+        url: localStorage.getItem('API_BASEURL') +'/delete/' + id,
         method: 'GET',
         success: function (res) {
             // console.log(res);

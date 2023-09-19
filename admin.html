@@ -7,7 +7,8 @@
     <title>Marekio</title>
 
     <script>
-        localStorage.setItem('API_BASEURL', 'http://localhost:8080');
+        // localStorage.setItem('API_BASEURL', 'http://localhost:8080');
+        localStorage.setItem('API_BASEURL', 'https://marekio.habarataku.my.id');
     </script>
     
     <link rel="stylesheet" href="/libs/onsenui/css/onsenui.css">
@@ -156,7 +157,7 @@
                 </div>
                 <div class="alert-dialog-footer">
                     <ons-alert-dialog-button onclick="hideAlertDialog()">Cancel</ons-alert-dialog-button>
-                    <ons-alert-dialog-button onclick="deleteProduct(localStorage.getItem('product_id'))">OK
+                    <ons-alert-dialog-button onclick="deleteProduct(localStorage.getItem('PRODUCT_DETAIL_ID'))">OK
                     </ons-alert-dialog-button>
                 </div>
             </ons-alert-dialog>
@@ -169,9 +170,12 @@
 
     <!-- # Orderan Page -->
     <template id="orderan.html">
-        <ons-page id="orderan">
+        <ons-page>
             <ons-toolbar>
                 <div class="center">Orderan</div>
+                <div class="right">
+                    <ons-toolbar-button id="btn-refresh-transaksi" onclick="initOrderan()">Refresh</ons-toolbar-button>
+                </div>
             </ons-toolbar>
             <ons-tabbar swipeable position="top">
                 <ons-tab page="orderan-proses.html" label="Proses"></ons-tab>
@@ -189,24 +193,14 @@
     </template>
 
     <template id="orderan-diantar.html">
-        <ons-page id="orderan-proses">
-            <!-- <section id="or"></section> -->
+        <ons-page id="orderan-diantar">
+             <section id="orderan-diantar-section"></section>
         </ons-page>
     </template>
 
     <template id="orderan-selesai.html">
-        <ons-page id="orderan-proses">
-            <ons-card class="card-orderan" tappable
-                onclick="fn.pushPage({'id': 'detail-pesanan.html', 'Pesanan #IUS871287A': 'PullHook'})">
-                <span class="notification">3</span>
-                <div class="title">
-                    Pesanan #8912YIAS
-                </div>
-                <div class="content">
-                    <p><b>Nacut</b></p>
-                    <p>081209984791</p>
-                    <p>Jln. Belmes; Dekat benteng hila</p>
-                </div>
+        <ons-page id="orderan-selesai">
+             <section id="orderan-selesai-section"></section>
             </ons-card>
         </ons-page>
     </template>
@@ -229,10 +223,10 @@
             <ons-popover id="popover-dialog-orderan" cancelable direction="down" cover-target target="#info-button">
                 <ons-list id="popover-list-orderan">
                     <ons-list-item class="more-options" tappable>
-                        <div class="center">Antar</div>
+                        <div class="center" onclick="changePesananStatus(1)">Antar</div>
                     </ons-list-item>
                     <ons-list-item class="more-options" tappable>
-                        <div class="center">Batal</div>
+                        <div class="center" onclick="changePesananStatus(2)">Selesai</div>
                     </ons-list-item>
                 </ons-list>
             </ons-popover>

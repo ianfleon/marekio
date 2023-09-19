@@ -94,7 +94,7 @@ function checkout() {
     });
 
     $.ajax({
-        url: 'http://localhost:8080/pesanan/add',
+        url: localStorage.getItem('API_BASEURL') + '/pesanan/add',
         method: 'POST',
         data: {
             pesanan: orderan,

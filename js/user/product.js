@@ -1,10 +1,12 @@
 function makeCardProduct(data) {
 
-    const card = `<ons-card class="card-product-wraper">
-    <div class="card-act ms-auto">
+	const btnPlus = `<div class="card-act ms-auto">
                         <button class="btn btn-green ms-auto"
                             onclick="addProductToCart(${data.product_id})"><i class="fas fa-plus"></i></button>
-                    </div>
+                    </div>`;
+
+    const card = `<ons-card class="card-product-wraper">
+				${((localStorage.getItem('X_USER_ID') != null) ? btnPlus : '')}
                 <div class="card-product">
                     <div class="card-content">
                         <img src="${localStorage.getItem('API_BASEURL')}/img/product/${data.product_img}"  onclick="viewDetailProduct(${data.product_id})" />
@@ -32,7 +34,7 @@ function viewDetailProduct(id) {
 function initProductsUser()
 {
     $.ajax({
-		url: 'http://localhost:8080/products',
+		url: localStorage.getItem('API_BASEURL')+'/products',
 		method: 'GET',
 		success: function (res) {
 			$('#products_wraper').empty();
@@ -77,7 +79,7 @@ function addProductToCart(idProduct)
 {
 	// console.log(`ID Product: ${idProduct}`);
 	$.ajax({
-		url: 'http://localhost:8080/cart/add',
+		url: localStorage.getItem('API_BASEURL') + '/cart/add',
 		method: 'POST',
 		data: {
 			product_xid: idProduct,

@@ -1,3 +1,5 @@
+console.log(localStorage);
+
 window.fn = {};
 
 window.fn.toggleMenu = function () {

@@ -1,4 +1,5 @@
-localStorage.setItem('API_BASEURL', 'http://localhost:8080');
+// localStorage.setItem('API_BASEURL', 'http://localhost:8080');
+localStorage.setItem('API_BASEURL', 'https://marekio.habarataku.my.id');
 
 ons.ready(function () {
 
