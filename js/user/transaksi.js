@@ -3,7 +3,7 @@
 class Transaksi {
 
 	setItems(dataItem) {
-		console.log(dataItem);
+		// console.log(dataItem);
 		$.ajax({
 			url: `${localStorage.getItem('API_BASEURL')}/pesanan/list/get?user_xid=${localStorage.getItem('X_USER_ID')}&pesanan_status=${dataItem.status}`,
 			method: 'GET',
@@ -54,8 +54,6 @@ function setViewDetailPesanan(c) {
 }
 
 function initTransaksi() {
-
-	console.log('initTransaksi()');
 
 	ons.ready(function () {
 		document.addEventListener("show", function (event) {

@@ -50,14 +50,26 @@ class Product extends BaseController
     {
         $reqs = $this->request->getPost();
         $imgfile = $this->request->getFile('product_img');
-
+  
+        // $newName = $imgfile->getRandomName();
+        // $imgfile->move(ROOTPATH . 'public/img/product', $newName);
         
-        $newName = $imgfile->getRandomName();
-        $imgfile->move(ROOTPATH . 'public/img/product', $newName);
-        
-        $reqs['product_img'] = $newName;
+        $reqs['product_img'] = $this->_upload_img($imgfile);
 
         $result = $this->model->insert($reqs);
+    }
+
+    private function _upload_img($imgfile)
+    {
+        // $imgPath = ROOTPATH . 'public/img/product';
+
+        // Ubah ini jika sudah upload ke hosting
+        $imgPath = PUBLIC_HTML_PATH . '/img/product';
+
+        $newName = $imgfile->getRandomName();
+        $imgfile->move($imgPath, $newName);
+
+        return $newName;
     }
 
     public function delete($id)
@@ -82,9 +94,9 @@ class Product extends BaseController
         $imgfile = $this->request->getFile('product_img');
 
         if ($imgfile->getSize() > 0) {
-            $newName = $imgfile->getRandomName();
-            $imgfile->move(ROOTPATH . 'public/img/product', $newName);
-            $reqs['product_img'] = $newName;
+            // $newName = $imgfile->getRandomName();
+            // $imgfile->move(ROOTPATH . 'public/img/product', $newName);
+            $reqs['product_img'] = $this->_upload_img($imgfile);
         }
 
         $result = $this->model->save($reqs);

@@ -26,7 +26,7 @@ function setViewDetailProduct(data) {
 function deleteProduct(id) {
 
     $.ajax({
-        url: localStorage.getItem('API_BASEURL') +'/delete/' + id,
+        url: localStorage.getItem('API_BASEURL') +'/products/delete/' + id,
         method: 'GET',
         success: function (res) {
             // console.log(res);

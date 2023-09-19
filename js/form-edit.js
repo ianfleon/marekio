@@ -41,7 +41,7 @@ function gantiGambar() {
 
 function updateProduct() {
 
-    console.log('Btn Clicked!');
+    // console.log('Btn Clicked!');
 
     const validasi = validasiFormEditProduct();
 

@@ -67,7 +67,7 @@ function changePesananStatus(s) {
                 'pesanan_status' : s
             },
             success: function (res) {
-                console.log(res);
+                // console.log(res);
                 if (res.code == 200) {
                     ons.notification.toast('Pesanan diantar!', {
                         timeout: 1000

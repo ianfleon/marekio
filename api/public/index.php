@@ -1,5 +1,7 @@
 <?php
 
+define('PUBLIC_HTML_PATH', __DIR__);
+
 // Path to the front controller (this file)
 define('FCPATH', __DIR__ . DIRECTORY_SEPARATOR);
 

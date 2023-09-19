@@ -1,6 +1,9 @@
 class Orderan {
 
     setItems(data) {
+
+        // console.log(data);
+        
         $.ajax({
             url: localStorage.getItem('API_BASEURL') + '/pesanan/status/' + data.status,
             method: 'GET',
@@ -40,7 +43,7 @@ function detailOrderan(c) {
 }
 
 function initOrderan() {
-    console.log('initOrderan()');
+    // console.log('initOrderan()');
     ons.ready(function () {
         document.addEventListener('show', function (event) {
     
@@ -52,7 +55,7 @@ function initOrderan() {
             let dataItem = {};
     
             switch (page) {
-                case 'orderan-diproses':
+                case 'orderan-proses':
                 orderan.setItems({
                     status: 0,
                     wraper: '#orderan-diproses-section'

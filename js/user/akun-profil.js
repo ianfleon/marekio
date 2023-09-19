@@ -78,6 +78,10 @@ function setViewFormEditAkun(data) {
                                     <label for="user_alamat" class="d-block mb-4 text-muted">Alamat</label>
                                     <input type="text" name="user_alamat" value="${data.user_alamat}" id="user_alamat" class="form-input" />
                                 </div>
+                                <div class="mb-4">
+                                    <label for="user_pw" class="d-block mb-4 text-muted">Password</label>
+                                    <input type="password" name="user_pw" value="${data.user_pw}" id="user_pw" class="form-input" />
+                                </div>
                                 <ons-button modifier="large" onclick="saveFormAkun()">Simpan</ons-button>
                             </div>
                         </form>
